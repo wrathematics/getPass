@@ -10,6 +10,8 @@
 #' 
 #' @name getPass-package
 #' 
+#' @importFrom utils packageVersion
+#' 
 #' @useDynLib getPass getPass_readline_masked
 #'
 #' @docType package

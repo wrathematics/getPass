@@ -9,6 +9,8 @@ Description: A micro-package for reading user input with masking, i.e.,
 License: BSD 2-clause License + file LICENSE
 Depends: 
     R (>= 3.2.0)
+Imports:
+    utils
 Suggests: 
     rstudioapi (>= 0.5)
 NeedsCompilation: yes
