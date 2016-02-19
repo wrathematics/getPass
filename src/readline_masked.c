@@ -28,7 +28,7 @@
 #include <R.h>
 #include <Rinternals.h>
 
-#define MAXLEN 200
+#define MAXLEN 201
 char pw[MAXLEN];
 int ctrlc;
 
@@ -126,6 +126,12 @@ SEXP getPass_readline_masked(SEXP msg)
 #if !(OS_WINDOWS)
   tcsetattr(0, TCSANOW, &old);
 #endif
+  
+  if (i == MAXLEN)
+  {
+    Rprintf("\n");
+    error("character limit exceeded");
+  }
   
   if (strncmp(CHARPT(msg, 0), "", 1) != 0)
     Rprintf("\n");
