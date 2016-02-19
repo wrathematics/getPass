@@ -12,6 +12,8 @@
 #' OS.  It is *NOT* supported in the Windows GUI RGui or on
 #' the Mac GUI R.app.
 #' 
+#' In the terminal, the maximum length for input is 200 characters.
+#' 
 #' @param query
 #' The message to enter into the R session before prompting
 #' for the masked input.  This can be any single string, 

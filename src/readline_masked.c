@@ -28,7 +28,6 @@
 #include <R.h>
 #include <Rinternals.h>
 
-// if you have passwords more than 200 chars, you have mental problems
 #define MAXLEN 200
 char pw[MAXLEN];
 int ctrlc;
@@ -72,7 +71,7 @@ SEXP getPass_readline_masked(SEXP msg)
   struct termios tp, old;
   tcgetattr(STDIN_FILENO, &tp);
   old = tp;
-  tp.c_lflag &= ~ECHO;
+  tp.c_lflag &= ~(ECHO | ICANON | ISIG);
   tcsetattr(0, TCSAFLUSH, &tp);
   #if OS_LINUX
   signal(SIGINT, ctrlc_handler); 
@@ -97,7 +96,7 @@ SEXP getPass_readline_masked(SEXP msg)
     if (c == '\n' || c == '\r')
       break;
     // backspace
-    else if (c == '\b')
+    else if (c == '\b' || c == '\177')
     {
       if (i == 0)
       {
