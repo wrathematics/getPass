@@ -59,7 +59,7 @@ getPass <- function(query="PASSWORD: ", forcemask=FALSE)
 
 readline_nomask <- function(query)
 {
-  cat("WARNING: input is not masked!\n")
+  cat("WARNING: your platform is not supported. Input is not masked!\n")
   
   readline(query) 
 }
