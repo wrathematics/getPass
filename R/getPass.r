@@ -67,7 +67,7 @@ readline_nomask <- function(query)
 readline_masked_rstudio <- function(query, forcemask)
 {
   msg <- ""
-  if (!get(".__withrstudioapi", env=getPassEnv) || packageVersion("rstudioapi") < 0.5)
+  if (!get(".__withrstudioapi", envir=getPassEnv) || packageVersion("rstudioapi") < 0.5)
     msg <- "For masked input with RStudio, please install the 'rstudioapi' package (>= 0.5)"
   else if (!rstudioapi::hasFun("askForPassword"))
     msg <- "Masked input is not supported in your version of RStudio; please update to version >= 0.99.879"

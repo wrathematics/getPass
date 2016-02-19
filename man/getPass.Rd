@@ -4,7 +4,7 @@
 \alias{getPass}
 \title{Password Input}
 \usage{
-getPass(query = "PASSWORD:  ", forcemask = FALSE)
+getPass(query = "PASSWORD: ", forcemask = FALSE)
 }
 \arguments{
 \item{query}{The message to enter into the R session before prompting
@@ -12,17 +12,21 @@ for the masked input.  This can be any single string,
 including a "blank", namely \code{""}.}
 
 \item{forcemask}{Logical; should the function stop with an error if masking
-is not supported?}
+is not supported? If \code{FALSE}, the function will default
+to use \code{readline()} with a warning message that the
+input is not masked, and otherwise will stop with an error.}
 }
 \value{
-
+If input is provided, then that is returned. If the user cancels
+(cancel button on RStudio or ctrl+c in the terminal), then
+\code{NULL} is returned.
 }
 \description{
 Masked user input (where supported; see details section) for
 entering passwords.
 }
 \details{
-Masking (i.e., not displaying the password or "*" characters
+Masking (i.e., not displaying the password 
 as input is provided) is supported on sevreal, but not all
 platforms.  It is supported in RStudio, provided you
 have a suitable version of the GUI and of the package 
@@ -33,6 +37,7 @@ the Mac GUI R.app.
 \examples{
 \dontrun{
 getPass::getPass()
+getPass::getPass("Enter the password: ")
 }
 
 }
