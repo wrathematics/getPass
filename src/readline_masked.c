@@ -65,7 +65,7 @@ SEXP getPass_readline_masked(SEXP msg)
   char c;
   ctrlc = 0;
   
-  Rprintf(CHARPT(msg, 0));
+  REprintf(CHARPT(msg, 0));
   
 #if !(OS_WINDOWS)
   struct termios tp, old;
@@ -115,7 +115,7 @@ SEXP getPass_readline_masked(SEXP msg)
 #if !(OS_WINDOWS)
       tcsetattr(0, TCSANOW, &old);
 #endif
-      Rprintf("\n");
+      REprintf("\n");
       return R_NilValue;
     }
     // store value
@@ -129,12 +129,12 @@ SEXP getPass_readline_masked(SEXP msg)
   
   if (i == MAXLEN)
   {
-    Rprintf("\n");
+    REprintf("\n");
     error("character limit exceeded");
   }
   
   if (strncmp(CHARPT(msg, 0), "", 1) != 0)
-    Rprintf("\n");
+    REprintf("\n");
   
   PROTECT(ret = allocVector(STRSXP, 1));
   SET_STRING_ELT(ret, 0, mkCharLen(pw, i));
