@@ -2,4 +2,5 @@
 
 export(getPass)
 importFrom(utils,packageVersion)
+useDynLib(getPass,getPass_print_stderr)
 useDynLib(getPass,getPass_readline_masked)

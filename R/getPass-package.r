@@ -12,7 +12,7 @@
 #' 
 #' @importFrom utils packageVersion
 #' 
-#' @useDynLib getPass getPass_readline_masked
+#' @useDynLib getPass getPass_readline_masked getPass_print_stderr
 #'
 #' @docType package
 #' @keywords package

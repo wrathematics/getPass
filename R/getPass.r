@@ -59,7 +59,7 @@ getPass <- function(msg="PASSWORD: ", forcemask=FALSE)
 
 readline_nomask <- function(msg)
 {
-  cat("WARNING: your platform is not supported. Input is not masked!\n")
+  print_stderr("WARNING: your platform is not supported. Input is not masked!\n")
   
   readline(msg) 
 }
@@ -88,11 +88,18 @@ readline_masked_rstudio <- function(msg, forcemask)
 
 readline_masked_term <- function(msg)
 {
-  ret <- .Call(getPass_readline_masked, msg)
-  
-  ret
+  .Call(getPass_readline_masked, msg)
 }
 
 
 
 getPassEnv <- new.env()
+
+
+
+print_stderr <- function(msg)
+{
+  ret <- .Call(getPass_print_stderr, msg)
+  invisible(ret)
+}
+
