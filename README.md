@@ -26,7 +26,7 @@ getPass::getPass()
 
 ## Installation
 
-There are currently no plans to submit this package to CRAN, but this is subject to change.
+The package is not yet available on CRAN.
 
 The development version is maintained on GitHub, and can easily be installed by any of the packages that offer installations from GitHub:
 
@@ -70,6 +70,6 @@ When a platform is unsupported, the function will optionally default to use R's 
 
 We thank Kevin Ushey for his assistance in answering questions in regard to supporting RStudio.
 
-The source code for this package comes from a modification of the **remoter** package, the development for which was supported by the project *Harnessing Scalable Libraries for Statistical Computing on Modern Architectures and Bringing Statistics to Large Scale Computing* funded by the National Science Foundation Division of Mathematical Sciences under Grant No. 1418195.
+The development for this package was supported by the project *Harnessing Scalable Libraries for Statistical Computing on Modern Architectures and Bringing Statistics to Large Scale Computing* funded by the National Science Foundation Division of Mathematical Sciences under Grant No. 1418195.
 
-Any  opinions,  findings,  and  conclusions  or  recommendations expressed  in  this  material  are those  of  the  authors  and  do  not necessarily  reflect  the  views  of  the  National  Science Foundation.
+Any opinions, findings, and conclusions or recommendations expressed in this material are those of the authors and do not necessarily reflect the views of the National Science Foundation.
