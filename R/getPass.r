@@ -14,7 +14,7 @@
 #' 
 #' In the terminal, the maximum length for input is 200 characters.
 #' 
-#' @param query
+#' @param msg
 #' The message to enter into the R session before prompting
 #' for the masked input.  This can be any single string, 
 #' including a "blank", namely \code{""}.
@@ -36,19 +36,19 @@
 #' }
 #' 
 #' @export
-getPass <- function(query="PASSWORD: ", forcemask=FALSE)
+getPass <- function(msg="PASSWORD: ", forcemask=FALSE)
 {
-  if (!is.character(query) || length(query) != 1)
-    stop("argument 'query' must be a single string")
+  if (!is.character(msg) || length(msg) != 1)
+    stop("argument 'msg' must be a single string")
   if (!is.logical(forcemask) || length(forcemask) != 1 || is.na(forcemask))
     stop("argument 'forcemask' must be one of 'TRUE' or 'FALSE'")
   
   if (tolower(.Platform$GUI) == "rstudio")
-    pw <- readline_masked_rstudio(query, forcemask)
+    pw <- readline_masked_rstudio(msg, forcemask)
   else if (.Platform$GUI == "X11" || .Platform$GUI == "RTerm")
-    pw <- readline_masked_term(query)
+    pw <- readline_masked_term(msg)
   else if (!forcemask)
-    pw <- readline_nomask(query) 
+    pw <- readline_nomask(msg) 
   else
     stop("Masking is not supported on your platform!")
   
@@ -57,29 +57,29 @@ getPass <- function(query="PASSWORD: ", forcemask=FALSE)
 
 
 
-readline_nomask <- function(query)
+readline_nomask <- function(msg)
 {
   cat("WARNING: input is not masked!\n")
   
-  readline(query) 
+  readline(msg) 
 }
 
 
 
-readline_masked_rstudio <- function(query, forcemask)
+readline_masked_rstudio <- function(msg, forcemask)
 {
-  msg <- ""
+  stopmsg <- ""
   if (!get(".__withrstudioapi", envir=getPassEnv) || packageVersion("rstudioapi") < 0.5)
-    msg <- "For masked input with RStudio, please install the 'rstudioapi' package (>= 0.5)"
+    stopmsg <- "For masked input with RStudio, please install the 'rstudioapi' package (>= 0.5)"
   else if (!rstudioapi::hasFun("askForPassword"))
-    msg <- "Masked input is not supported in your version of RStudio; please update to version >= 0.99.879"
+    stopmsg <- "Masked input is not supported in your version of RStudio; please update to version >= 0.99.879"
   
-  if (msg == "")
-    pw <- rstudioapi::askForPassword(query)
+  if (stopmsg == "")
+    pw <- rstudioapi::askForPassword(msg)
   else if (!forcemask)
-    pw <- readline_nomask(query)
+    pw <- readline_nomask(msg)
   else
-    stop("Masking is not supported on your platform!")
+    stop(stopmsg)
   
   pw
 }
