@@ -17,7 +17,7 @@ Currently, RStudio and the commandline are both supported.  Other GUI's such as 
 ## Usage
 
 ```r
-getPass::getpass()
+getPass::getPass()
 ```
 
 
