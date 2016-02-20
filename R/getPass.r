@@ -43,9 +43,11 @@ getPass <- function(msg="PASSWORD: ", forcemask=FALSE)
   if (!is.logical(forcemask) || length(forcemask) != 1 || is.na(forcemask))
     stop("argument 'forcemask' must be one of 'TRUE' or 'FALSE'")
   
-  if (tolower(.Platform$GUI) == "rstudio")
+  gui <- .Platform$GUI
+  
+  if (tolower(gui) == "rstudio")
     pw <- readline_masked_rstudio(msg, forcemask)
-  else if (.Platform$GUI == "X11" || .Platform$GUI == "RTerm")
+  else if (gui == "X11" || gui == "RTerm")
     pw <- readline_masked_term(msg)
   else if (!forcemask)
     pw <- readline_nomask(msg) 
@@ -102,4 +104,3 @@ print_stderr <- function(msg)
   ret <- .Call(getPass_print_stderr, msg)
   invisible(ret)
 }
-
