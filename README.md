@@ -37,15 +37,6 @@ ghit::install_github("wrathematics/getPass")
 remotes::install_github("wrathematics/getPass")
 ```
 
-#### RStudio
-If you are using RStudio, you should also install the latest **rstudioapi** package.  This is not done automatically when building and installing **getPass**.
-
-```r
-devtools::install_github("rstudio/rstudioapi")
-ghit::install_github("rstudio/rstudioapi")
-remotes::install_github("rstudio/rstudioapi")
-```
-
 
 
 

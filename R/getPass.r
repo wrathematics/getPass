@@ -72,18 +72,15 @@ readline_nomask <- function(msg)
 
 readline_masked_rstudio <- function(msg, forcemask)
 {
-  stopmsg <- ""
-  if (!get(".__withrstudioapi", envir=getPassEnv) || packageVersion("rstudioapi") < 0.5)
-    stopmsg <- "For masked input with RStudio, please install the 'rstudioapi' package (>= 0.5)"
-  else if (!rstudioapi::hasFun("askForPassword"))
-    stopmsg <- "Masked input is not supported in your version of RStudio; please update to version >= 0.99.879"
-
-  if (stopmsg == "")
-    pw <- rstudioapi::askForPassword(msg)
-  else if (!forcemask)
-    pw <- readline_nomask(msg)
+  if (!rstudioapi::hasFun("askForPassword"))
+  {
+    if (!forcemask)
+      pw <- readline_nomask(msg)
+    else
+      stop("Masked input is not supported in your version of RStudio; please update to version >= 0.99.879")
+  }
   else
-    stop(stopmsg)
+    pw <- rstudioapi::askForPassword(msg)
 
   pw
 }
@@ -133,7 +130,7 @@ readline_masked_tcltk <- function(msg)
   pw <- tclvalue(pwdvar)
 
   flag <- tclvalue(flagvar)
-  if(flag == 0)
+  if (flag == 0)
     pw <- NULL
 
   return(pw)
