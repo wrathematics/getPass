@@ -1,7 +1,7 @@
 If you are having issues using the package, please provide some platform information which you can determine with the following R code:
 
 ```r
-# Interface - NOTE only RStudio, RTerm, and X11 are supported
+# Interface
 .Platform$GUI
 
 # OS

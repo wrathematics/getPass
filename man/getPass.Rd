@@ -8,7 +8,7 @@ getPass(msg = "PASSWORD: ", forcemask = FALSE)
 }
 \arguments{
 \item{msg}{The message to enter into the R session before prompting
-for the masked input.  This can be any single string, 
+for the masked input.  This can be any single string,
 including a "blank", namely \code{""}.}
 
 \item{forcemask}{Logical; should the function stop with an error if masking
@@ -26,13 +26,13 @@ Masked user input (where supported; see details section) for
 entering passwords.
 }
 \details{
-Masking (i.e., not displaying the password 
-as input is provided) is supported on sevreal, but not all
+Masking (i.e., not displaying the password
+as input is provided) is supported on most, but not all
 platforms.  It is supported in RStudio, provided you
-have a suitable version of the GUI and of the package 
+have a suitable version of the GUI and of the package
 'rstudioapi'.  It should also work in the terminal on any
-OS.  It is *NOT* supported in the Windows GUI RGui or on
-the Mac GUI R.app.
+OS.  Finally, it will work in any environment where the tcltk
+package is available.  
 
 In the terminal, the maximum length for input is 200 characters.
 }

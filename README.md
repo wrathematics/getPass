@@ -2,14 +2,14 @@
 
 * **Version:** 0.1-0
 * **URL**: https://github.com/wrathematics/getPass
+* **Status:** [![Build Status](https://travis-ci.org/wrathematics/getPass.png)](https://travis-ci.org/wrathematics/getPass)
 * **License:** [![License](http://img.shields.io/badge/license-BSD%202--Clause-orange.svg?style=flat)](http://opensource.org/licenses/BSD-2-Clause)
-* **Author:** Drew Schmidt
+* **Author:** Drew Schmidt and Wei-Chen Chen
 
 
 A micro-package for reading user input in R with masking, i.e., the input is not displayed as it is typed.
 
-Currently, RStudio and the commandline are both supported.  Other GUI's such as RGui on Windows and R.app on Mac are not supported (it's not possible at this time).  For unsupported platforms, non-masked reading (with a warning) is optionally available.  See the details section of this README for more information.
-
+Currently, RStudio, the command line (any OS), and platforms where the **tcltk** package is available are supported.  We believe this hits just about everything, but for unsupported platforms, non-masked reading (with a warning) is optionally available.  See the details section of this README for more information.
 
 
 
@@ -37,6 +37,15 @@ ghit::install_github("wrathematics/getPass")
 remotes::install_github("wrathematics/getPass")
 ```
 
+#### RStudio
+If you are using RStudio, you should also install the latest **rstudioapi** package.  This is not done automatically when building and installing **getPass**.
+
+```r
+devtools::install_github("rstudio/rstudioapi")
+ghit::install_github("rstudio/rstudioapi")
+remotes::install_github("rstudio/rstudioapi")
+```
+
 
 
 
@@ -58,8 +67,13 @@ On Windows, the reader is just `_getch()`.  On 'nix environments (Mac, Linux, ..
 
 If you discover an issue, please [file an issue report](https://github.com/wrathematics/getPass/issues).
 
-#### Unsupported Platforms
+#### RGui (Windows)
+If you use RGui (the Windows R GUI), then this should use the **tcltk** package.  I don't think it's actually possible for **tcltk** to be unavailable on Windows, so if you are an RGui user and have trouble with this, please [file an issue report](https://github.com/wrathematics/getPass/issues).
 
+#### R.app (Mac)
+You will need to install dependencies for the **tcltk** package.  I'm not completely sure what this process involves for Macs; if you know, please let us know.  If **tcltk** is unavailable, then it will use the "unsupported" method below.
+
+#### Other/Unsupported Platforms
 When a platform is unsupported, the function will optionally default to use R's `readline()` (without masking!) with a warning communicated to the user, or it can stop with an error.
 
 
@@ -70,6 +84,6 @@ When a platform is unsupported, the function will optionally default to use R's 
 
 We thank Kevin Ushey for his assistance in answering questions in regard to supporting RStudio.
 
-The development for this package was supported by the project *Harnessing Scalable Libraries for Statistical Computing on Modern Architectures and Bringing Statistics to Large Scale Computing* funded by the National Science Foundation Division of Mathematical Sciences under Grant No. 1418195.
+The development for this package was supported in part by the project *Harnessing Scalable Libraries for Statistical Computing on Modern Architectures and Bringing Statistics to Large Scale Computing* funded by the National Science Foundation Division of Mathematical Sciences under Grant No. 1418195.
 
 Any opinions, findings, and conclusions or recommendations expressed in this material are those of the authors and do not necessarily reflect the views of the National Science Foundation.

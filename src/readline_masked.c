@@ -1,16 +1,16 @@
 /*  Copyright (c) 2016, Schmidt
     All rights reserved.
-    
+
     Redistribution and use in source and binary forms, with or without
     modification, are permitted provided that the following conditions are met:
-    
+
     1. Redistributions of source code must retain the above copyright notice,
     this list of conditions and the following disclaimer.
-    
+
     2. Redistributions in binary form must reproduce the above copyright
     notice, this list of conditions and the following disclaimer in the
     documentation and/or other materials provided with the distribution.
-    
+
     THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
     "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
     TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
@@ -58,15 +58,16 @@ static void ctrlc_handler(int signal)
 #endif
 
 
-SEXP getPass_readline_masked(SEXP msg)
+SEXP getPass_readline_masked(SEXP msg, SEXP showstars_)
 {
   SEXP ret;
+  const int showstars = INTEGER(showstars_)[0];
   int i=0;
   char c;
   ctrlc = 0;
-  
+
   REprintf(CHARPT(msg, 0));
-  
+
 #if !(OS_WINDOWS)
   struct termios tp, old;
   tcgetattr(STDIN_FILENO, &tp);
@@ -74,7 +75,7 @@ SEXP getPass_readline_masked(SEXP msg)
   tp.c_lflag &= ~(ECHO | ICANON | ISIG);
   tcsetattr(0, TCSAFLUSH, &tp);
   #if OS_LINUX
-  signal(SIGINT, ctrlc_handler); 
+  signal(SIGINT, ctrlc_handler);
   #else
   struct sigaction sa;
   sa.sa_handler = ctrlc_handler;
@@ -83,7 +84,7 @@ SEXP getPass_readline_masked(SEXP msg)
   sigaction(SIGINT, &sa, NULL);
   #endif
 #endif
-  
+
   for (i=0; i<MAXLEN; i++)
   {
 #if OS_WINDOWS
@@ -91,7 +92,7 @@ SEXP getPass_readline_masked(SEXP msg)
 #else
     c = fgetc(stdin);
 #endif
-    
+
     // newline
     if (c == '\n' || c == '\r')
       break;
@@ -105,6 +106,9 @@ SEXP getPass_readline_masked(SEXP msg)
       }
       else
       {
+        if (showstars)
+          REprintf("\b \b");
+
         pw[--i] = '\0';
         i--;
       }
@@ -120,22 +124,27 @@ SEXP getPass_readline_masked(SEXP msg)
     }
     // store value
     else
+    {
+      if (showstars)
+        REprintf("*");
+
       pw[i] = c;
+    }
   }
-  
+
 #if !(OS_WINDOWS)
   tcsetattr(0, TCSANOW, &old);
 #endif
-  
+
   if (i == MAXLEN)
   {
     REprintf("\n");
     error("character limit exceeded");
   }
-  
+
   if (strncmp(CHARPT(msg, 0), "", 1) != 0)
     REprintf("\n");
-  
+
   PROTECT(ret = allocVector(STRSXP, 1));
   SET_STRING_ELT(ret, 0, mkCharLen(pw, i));
   UNPROTECT(1);
