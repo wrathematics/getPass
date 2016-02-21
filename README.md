@@ -36,6 +36,15 @@ ghit::install_github("wrathematics/getPass")
 remotes::install_github("wrathematics/getPass")
 ```
 
+#### RStudio
+If you are using RStudio, you should also install the latest **rstudioapi** package.  This is not done automatically when building and installing **getPass**.
+
+```r
+devtools::install_github("rstudio/rstudioapi")
+ghit::install_github("rstudio/rstudioapi")
+remotes::install_github("rstudio/rstudioapi")
+```
+
 
 
 
@@ -57,12 +66,13 @@ On Windows, the reader is just `_getch()`.  On 'nix environments (Mac, Linux, ..
 
 If you discover an issue, please [file an issue report](https://github.com/wrathematics/getPass/issues).
 
-#### RGui and R.app
+#### RGui (Windows)
+If you use RGui (the Windows R GUI), then this should use the **tcltk** package.  I don't think it's actually possible for **tcltk** to be unavailable on Windows, so if you are an RGui user and have trouble with this, please [file an issue report](https://github.com/wrathematics/getPass/issues).
 
-Both of these should work using the **tcltk** method.  If **tcltk** is for some reason unavailable (I don't think this is possible for RGui on Windows), then it will use the "unsupported" method below.
+#### R.app (Mac)
+You will need to install dependencies for the **tcltk** package.  I'm not completely sure what this process involves for Macs; if you know, please let us know.  If **tcltk** is unavailable, then it will use the "unsupported" method below.
 
-#### Unsupported Platforms
-
+#### Other/Unsupported Platforms
 When a platform is unsupported, the function will optionally default to use R's `readline()` (without masking!) with a warning communicated to the user, or it can stop with an error.
 
 
