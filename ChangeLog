@@ -1,3 +1,4 @@
 Release 0.1-0:
   * Import functionality from remoter.
   * Add tcltk method (WCC).
+  * Print *'s in the terminal (not my preference, but seems popular).

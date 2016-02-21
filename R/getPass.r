@@ -10,7 +10,7 @@
 #' have a suitable version of the GUI and of the package
 #' 'rstudioapi'.  It should also work in the terminal on any
 #' OS.  Finally, it will work in any environment where the tcltk
-#' package is available.  
+#' package is available.
 #'
 #' In the terminal, the maximum length for input is 200 characters.
 #'
@@ -48,7 +48,7 @@ getPass <- function(msg="PASSWORD: ", forcemask=FALSE)
   if (tolower(gui) == "rstudio")
     pw <- readline_masked_rstudio(msg, forcemask)
   else if (gui == "X11" || gui == "RTerm")
-    pw <- readline_masked_term(msg)
+    pw <- readline_masked_term(msg, showstars=TRUE)
   else if (get(".__withtcltk", envir=getPassEnv))
     pw <- readline_masked_tcltk(msg)
   else if (!forcemask)
@@ -90,9 +90,9 @@ readline_masked_rstudio <- function(msg, forcemask)
 
 
 
-readline_masked_term <- function(msg)
+readline_masked_term <- function(msg, showstars)
 {
-  .Call(getPass_readline_masked, msg)
+  .Call(getPass_readline_masked, msg, as.integer(showstars))
 }
 
 
