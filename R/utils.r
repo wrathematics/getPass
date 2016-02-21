@@ -1,5 +1,12 @@
-getPassEnv <- new.env()
+# getPassEnv <- new.env()
 
+init_env <- function(envir = .GlobalEnv)
+{
+  if(!exists("getPassEnv", envir = envir))
+    envir$getPassEnv <- new.env()
+
+  invisible()
+}
 
 
 print_stderr <- function(msg)

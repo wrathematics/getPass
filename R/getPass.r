@@ -101,7 +101,7 @@ readline_masked_tcltk <- function(msg)
 {
 
   if(get(".__withtcltk", envir=getPassEnv))
-    eval(parse(text = "require(tcltk, quietly = TRUE)"))
+    eval(parse(text = "require('tcltk', quietly = TRUE)"))
   else
     stop("tcltk is not available.")
 
