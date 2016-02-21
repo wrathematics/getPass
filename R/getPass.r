@@ -42,12 +42,10 @@ getPass <- function(msg="PASSWORD: ", forcemask=FALSE)
     stop("argument 'msg' must be a single string")
   if (!is.logical(forcemask) || length(forcemask) != 1 || is.na(forcemask))
     stop("argument 'forcemask' must be one of 'TRUE' or 'FALSE'")
-
-  gui <- .Platform$GUI
-
-  if (tolower(gui) == "rstudio")
+  
+  if (tolower(.Platform$GUI) == "rstudio")
     pw <- readline_masked_rstudio(msg, forcemask)
-  else if (gui == "X11" || gui == "RTerm")
+  else if (isaterm())
     pw <- readline_masked_term(msg, showstars=TRUE)
   else if (get(".__withtcltk", envir=getPassEnv))
     pw <- readline_masked_tcltk(msg)
@@ -55,7 +53,7 @@ getPass <- function(msg="PASSWORD: ", forcemask=FALSE)
     pw <- readline_nomask(msg)
   else
     stop("Masking is not supported on your platform!")
-
+  
   pw
 }
 
@@ -64,7 +62,7 @@ getPass <- function(msg="PASSWORD: ", forcemask=FALSE)
 readline_nomask <- function(msg)
 {
   print_stderr("WARNING: your platform is not supported. Input is not masked!\n")
-
+  
   readline(msg)
 }
 
@@ -72,19 +70,16 @@ readline_nomask <- function(msg)
 
 readline_masked_rstudio <- function(msg, forcemask)
 {
-  stopmsg <- ""
-  if (!get(".__withrstudioapi", envir=getPassEnv) || packageVersion("rstudioapi") < 0.5)
-    stopmsg <- "For masked input with RStudio, please install the 'rstudioapi' package (>= 0.5)"
-  else if (!rstudioapi::hasFun("askForPassword"))
-    stopmsg <- "Masked input is not supported in your version of RStudio; please update to version >= 0.99.879"
-
-  if (stopmsg == "")
-    pw <- rstudioapi::askForPassword(msg)
-  else if (!forcemask)
-    pw <- readline_nomask(msg)
+  if (!rstudioapi::hasFun("askForPassword"))
+  {
+    if (!forcemask)
+      pw <- readline_nomask(msg)
+    else
+      stop("Masked input is not supported in your version of RStudio; please update to version >= 0.99.879")
+  }
   else
-    stop(stopmsg)
-
+    pw <- rstudioapi::askForPassword(msg)
+  
   pw
 }
 
@@ -99,48 +94,43 @@ readline_masked_term <- function(msg, showstars)
 
 readline_masked_tcltk <- function(msg)
 {
-
-  if(get(".__withtcltk", envir=getPassEnv))
-    eval(parse(text = "require('tcltk', quietly = TRUE)"))
-  else
-    stop("tcltk is not available.")
-
-  tt <- tktoplevel()
-  tktitle(tt) <- ""
-  pwdvar <- tclVar("")
-  flagvar <- tclVar(0)
-
-  f1 <- tkframe(tt)
-  tkpack(f1, side = "top")
-  tkpack(tklabel(f1, text = msg), side = "left")
-  textbox <- tkentry(f1, textvariable = pwdvar, show = "*")
-
-
+  tt <- tcltk::tktoplevel()
+  tcltk::tktitle(tt) <- ""
+  pwdvar <- tcltk::tclVar("")
+  flagvar <- tcltk::tclVar(0)
+  
+  f1 <- tcltk::tkframe(tt)
+  tcltk::tkpack(f1, side = "top")
+  tcltk::tkpack(tcltk::tklabel(f1, text = msg), side = "left")
+  textbox <- tcltk::tkentry(f1, textvariable = pwdvar, show = "*")
+  
+  
   reset <- function(){
-    tclvalue(pwdvar) <- ""
+    tcltk::tclvalue(pwdvar) <- ""
   }
-  reset.but <- tkbutton(f1, text = "Reset", command = reset)
-
+  reset.but <- tcltk::tkbutton(f1, text = "Reset", command = reset)
+  
   submit <- function(){
-    tclvalue(flagvar) <- 1
-    tkdestroy(tt)
+    tcltk::tclvalue(flagvar) <- 1
+    tcltk::tkdestroy(tt)
   }
-
-
-  tkpack(textbox, side = "left")
-  tkbind(textbox, "<Return>", submit)
-
-  submit.but <- tkbutton(f1, text = "Submit", command = submit)
-
-  tkpack(reset.but, side = "left")
-  tkpack(submit.but, side = "right")
-
-  tkwait.window(tt)
-  pw <- tclvalue(pwdvar)
-
-  flag <- tclvalue(flagvar)
-  if(flag == 0)
+  
+  
+  tcltk::tkpack(textbox, side = "left")
+  tcltk::tkbind(textbox, "<Return>", submit)
+  
+  submit.but <- tcltk::tkbutton(f1, text = "Submit", command = submit)
+  
+  tcltk::tkpack(reset.but, side = "left")
+  tcltk::tkpack(submit.but, side = "right")
+  
+  tcltk::tkwait.window(tt)
+  pw <- tcltk::tclvalue(pwdvar)
+  
+  flag <- tcltk::tclvalue(flagvar)
+  if (flag == 0)
     pw <- NULL
-
+  
   return(pw)
 }
+
