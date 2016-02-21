@@ -49,6 +49,8 @@ getPass <- function(msg="PASSWORD: ", forcemask=FALSE)
     pw <- readline_masked_rstudio(msg, forcemask)
   else if (gui == "X11" || gui == "RTerm")
     pw <- readline_masked_term(msg)
+  else if (gui == "Rgui" && .Platform$OS.type == "windows")
+    pw <- getpwd_rgui(msg)
   else if (!forcemask)
     pw <- readline_nomask(msg) 
   else
