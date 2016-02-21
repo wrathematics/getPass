@@ -32,7 +32,7 @@ platforms.  It is supported in RStudio, provided you
 have a suitable version of the GUI and of the package
 'rstudioapi'.  It should also work in the terminal on any
 OS.  Finally, it will work in any environment where the tcltk
-package is available.  
+package is available.
 
 In the terminal, the maximum length for input is 200 characters.
 }
