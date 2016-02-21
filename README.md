@@ -3,7 +3,7 @@
 * **Version:** 0.1-0
 * **URL**: https://github.com/wrathematics/getPass
 * **License:** [![License](http://img.shields.io/badge/license-BSD%202--Clause-orange.svg?style=flat)](http://opensource.org/licenses/BSD-2-Clause)
-* **Author:** Drew Schmidt
+* **Author:** Drew Schmidt and Wei-Chen Chen
 
 
 A micro-package for reading user input in R with masking, i.e., the input is not displayed as it is typed.
@@ -70,6 +70,6 @@ When a platform is unsupported, the function will optionally default to use R's 
 
 We thank Kevin Ushey for his assistance in answering questions in regard to supporting RStudio.
 
-The development for this package was supported by the project *Harnessing Scalable Libraries for Statistical Computing on Modern Architectures and Bringing Statistics to Large Scale Computing* funded by the National Science Foundation Division of Mathematical Sciences under Grant No. 1418195.
+The development for this package was supported in part by the project *Harnessing Scalable Libraries for Statistical Computing on Modern Architectures and Bringing Statistics to Large Scale Computing* funded by the National Science Foundation Division of Mathematical Sciences under Grant No. 1418195.
 
 Any opinions, findings, and conclusions or recommendations expressed in this material are those of the authors and do not necessarily reflect the views of the National Science Foundation.

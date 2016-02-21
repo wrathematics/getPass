@@ -7,17 +7,20 @@ Description: A micro-package for reading user input with masking, i.e.,
     supported GUI is a very recent version of RStudio.  Running
     from the command line is supported on every major OS.
 License: BSD 2-clause License + file LICENSE
-Depends: R (>= 3.0.0)
-Imports: utils
-Suggests: rstudioapi (>= 0.5)
-Enhances: tcltk
+Depends: 
+    R (>= 3.0.0)
+Imports: 
+    utils
+Suggests: 
+    rstudioapi (>= 0.5)
+Enhances: 
+    tcltk
 NeedsCompilation: yes
 ByteCompile: yes
 Authors@R: c(person("Drew", "Schmidt", role=c("aut", "cre"),
-    email="wrathematics@gmail.com"))
+    email="wrathematics@gmail.com"),
+    person("Wei-Chen", "Chen", role="aut"))
 URL: https://github.com/wrathematics/getPass
 BugReports: https://github.com/wrathematics/getPass/issues
 Maintainer: Drew Schmidt <wrathematics@gmail.com>
 RoxygenNote: 5.0.1
-Packaged: 2016-02-21 02:10:11 UTC; snoweye
-Author: Drew Schmidt [aut, cre]
