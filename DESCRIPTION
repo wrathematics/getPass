@@ -18,7 +18,8 @@ NeedsCompilation: yes
 ByteCompile: yes
 Authors@R: c(person("Drew", "Schmidt", role=c("aut", "cre"),
     email="wrathematics@gmail.com"),
-    person("Wei-Chen", "Chen", role="aut"))
+    person("Wei-Chen", "Chen", role="aut"),
+    person("Gabor", "Csardi", role="ctb", comment="Improved terminal detection"))
 URL: https://github.com/wrathematics/getPass
 BugReports: https://github.com/wrathematics/getPass/issues
 Maintainer: Drew Schmidt <wrathematics@gmail.com>
