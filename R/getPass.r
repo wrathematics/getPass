@@ -49,8 +49,8 @@ getPass <- function(msg="PASSWORD: ", forcemask=FALSE)
     pw <- readline_masked_rstudio(msg, forcemask)
   else if (gui == "X11" || gui == "RTerm")
     pw <- readline_masked_term(msg)
-  else if (gui == "Rgui" && .Platform$OS.type == "windows")
-    pw <- getpwd_rgui(msg)
+  else if (get(".__withtcltk", envir=getPassEnv))
+    pw <- readline_masked_tcltk(msg)
   else if (!forcemask)
     pw <- readline_nomask(msg) 
   else
@@ -97,12 +97,45 @@ readline_masked_term <- function(msg)
 
 
 
-getPassEnv <- new.env()
-
-
-
-print_stderr <- function(msg)
+readline_masked_tcltk <- function(msg)
 {
-  ret <- .Call(getPass_print_stderr, msg)
-  invisible(ret)
+  tt <- tktoplevel()
+  tktitle(tt) <- ""
+  pwdvar <- tclVar("")
+  flagvar <- tclVar(0)
+  
+  f1 <- tkframe(tt)
+  tkpack(f1, side = "top")
+  tkpack(tklabel(f1, text = msg), side = "left")
+  textbox <- tkentry(f1, textvariable = pwdvar, show = "*")
+  
+  
+  reset <- function(){
+    tclvalue(pwdvar) <- "" 
+  }
+  reset.but <- tkbutton(f1, text = "Reset", command = reset)
+  
+  submit <- function(){
+    tclvalue(flagvar) <- 1
+    tkdestroy(tt)
+  }
+  
+  
+  tkpack(textbox, side = "left")
+  tkbind(textbox, "<Return>", submit)
+  
+  submit.but <- tkbutton(f1, text = "Submit", command = submit)
+  
+  tkpack(reset.but, side = "left")
+  tkpack(submit.but, side = "right")
+  
+  tkwait.window(tt)
+  pw <- tclvalue(pwdvar)
+  
+  flag <- tclvalue(flagvar)
+  if(flag == 0)
+    pw <- NULL
+  
+  return(pw)
 }
+
