@@ -8,8 +8,7 @@
 
 A micro-package for reading user input in R with masking, i.e., the input is not displayed as it is typed.
 
-Currently, RStudio and the commandline are both supported.  Other GUI's such as RGui on Windows and R.app on Mac are not supported (it's not possible at this time).  For unsupported platforms, non-masked reading (with a warning) is optionally available.  See the details section of this README for more information.
-
+Currently, RStudio, the command line (any OS), and platforms where the **tcltk** package is available are supported.  We believe this hits just about everything, but for unsupported platforms, non-masked reading (with a warning) is optionally available.  See the details section of this README for more information.
 
 
 
@@ -57,6 +56,10 @@ Here, the input reader is custom.  It has been tested successfully on Windows (i
 On Windows, the reader is just `_getch()`.  On 'nix environments (Mac, Linux, ...), masking is made possible via `tcsetattr()`.  Special handling for each is provided for handling ctrl+c and backspace.
 
 If you discover an issue, please [file an issue report](https://github.com/wrathematics/getPass/issues).
+
+#### RGui and R.app
+
+Both of these should work using the **tcltk** method.  If **tcltk** is for some reason unavailable (I don't think this is possible for RGui on Windows), then it will use the "unsupported" method below.
 
 #### Unsupported Platforms
 
