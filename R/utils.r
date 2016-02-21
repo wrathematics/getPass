@@ -33,3 +33,14 @@ isaterm <- function()
   else
     return(FALSE)
 }
+
+
+
+hastcltk <- function()
+{
+  test <- tryCatch(requireNamespace("tcltk", quietly=TRUE), warning=identity)
+  if (!is.logical(test))
+    test <- FALSE
+  
+  test
+}
