@@ -47,7 +47,7 @@ getPass <- function(msg="PASSWORD: ", forcemask=FALSE)
     pw <- readline_masked_rstudio(msg, forcemask)
   else if (isaterm())
     pw <- readline_masked_term(msg, showstars=TRUE)
-  else if (get(".__withtcltk", envir=getPassEnv))
+  else if (hastcltk())
     pw <- readline_masked_tcltk(msg)
   else if (!forcemask)
     pw <- readline_nomask(msg)
@@ -133,4 +133,3 @@ readline_masked_tcltk <- function(msg)
   
   return(pw)
 }
-
