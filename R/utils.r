@@ -1,4 +1,4 @@
-etPassEnv <- new.env()
+getPassEnv <- new.env()
 
 
 print_stderr <- function(msg)
