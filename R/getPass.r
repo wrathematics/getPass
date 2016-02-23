@@ -128,6 +128,9 @@ readline_masked_tcltk <- function(msg)
   
   tcltk::tkpack(reset.but, side = "left")
   tcltk::tkpack(submit.but, side = "right")
+
+  tcltk::tkwm.deiconify(tt)
+  tcltk::tkfocus(textbox)
   
   tcltk::tkwait.window(tt)
   pw <- tcltk::tclvalue(pwdvar)
