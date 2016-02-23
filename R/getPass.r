@@ -99,42 +99,61 @@ readline_masked_term <- function(msg, showstars)
 
 readline_masked_tcltk <- function(msg)
 {
+  ### Define event action.
+  reset <- function(){
+    tcltk::tclvalue(pwdvar) <- ""
+  }
+
+  submit <- function(){
+    tcltk::tclvalue(flagvar) <- 1
+    tcltk::tkdestroy(tt)
+  }
+
+  cleanup <- function(){
+    tcltk::tclvalue(flagvar) <- 0
+    tcltk::tkdestroy(tt)
+  }
+
+  ### Main window.
   tt <- tcltk::tktoplevel()
   tcltk::tktitle(tt) <- ""
   pwdvar <- tcltk::tclVar("")
   flagvar <- tcltk::tclVar(0)
   
+  ### Main frame.
   f1 <- tcltk::tkframe(tt)
   tcltk::tkpack(f1, side = "top")
   tcltk::tkpack(tcltk::tklabel(f1, text = msg), side = "left")
+
+  ### Main entry.
   textbox <- tcltk::tkentry(f1, textvariable = pwdvar, show = "*")
-  
-  
-  reset <- function(){
-    tcltk::tclvalue(pwdvar) <- ""
-  }
-  reset.but <- tcltk::tkbutton(f1, text = "Reset", command = reset)
-  
-  submit <- function(){
-    tcltk::tclvalue(flagvar) <- 1
-    tcltk::tkdestroy(tt)
-  }
-  
-  
   tcltk::tkpack(textbox, side = "left")
   tcltk::tkbind(textbox, "<Return>", submit)
-  
+  if(.Platform$OS == "windows")
+    tcltk::tkbind(textbox, "<Escape>", cleanup)
+  else
+    tcltk::tkbind(textbox, "<Control-c>", cleanup)
+
+  ### Buttons for submit and reset.
+  reset.but <- tcltk::tkbutton(f1, text = "Reset", command = reset)
   submit.but <- tcltk::tkbutton(f1, text = "Submit", command = submit)
-  
   tcltk::tkpack(reset.but, side = "left")
   tcltk::tkpack(submit.but, side = "right")
-  
+
+  ### Add focus.
+  tcltk::tkwm.minsize(tt, "300", "40")
+  # tcltk::tkwm.maxsize(tt, "200", "40")
+  tcltk::tkwm.deiconify(tt)
+  tcltk::tkfocus(textbox)
+
+  ### Wait for destroy signal.
   tcltk::tkwait.window(tt)
   pw <- tcltk::tclvalue(pwdvar)
-  
+
+  ### Check for return.
   flag <- tcltk::tclvalue(flagvar)
   if (flag == 0)
     pw <- NULL
-  
+
   return(pw)
 }
