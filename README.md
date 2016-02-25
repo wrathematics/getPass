@@ -26,7 +26,12 @@ getPass::getPass()
 
 ## Installation
 
-The package is not yet available on CRAN.
+
+You can install the stable version from CRAN using the usual `install.packages()`:
+
+```r
+install.packages("getPass")
+```
 
 The development version is maintained on GitHub, and can easily be installed by any of the packages that offer installations from GitHub:
 
