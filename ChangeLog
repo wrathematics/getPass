@@ -1,4 +1,8 @@
+Release 0.1-1:
+  * 
+
 Release 0.1-0:
+  * Release to CRAN.
   * Print *'s in the terminal (not my preference, but seems popular).
   * Add tcltk method (WCC).
   * Fixes for OS X.
