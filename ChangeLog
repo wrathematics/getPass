@@ -1,7 +1,7 @@
-Release 0.1-1:
+Release 0.1-1 (///):
   * 
 
-Release 0.1-0:
+Release 0.1-0 (2/25/2016):
   * Release to CRAN.
   * Print *'s in the terminal (not my preference, but seems popular).
   * Add tcltk method (WCC).
