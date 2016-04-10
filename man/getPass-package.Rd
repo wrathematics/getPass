@@ -5,10 +5,10 @@
 \alias{getPass-package}
 \title{getPass}
 \description{
-A micro-package for reading user input with masking, i.e.,
-the input is not displayed as it is typed.  Currently the only
-supported GUI is a very recent version of RStudio.  Running
-from the command line is supported on every major OS.
+A micro-package for reading "passwords", i.e.  reading
+user input with masking, so that the input is not displayed as it 
+is typed.  Currently we have support for RStudio, the command line
+(every OS), and any platform where tcltk is present.
 }
 \author{
 Drew Schmidt and Wei-Chen Chen

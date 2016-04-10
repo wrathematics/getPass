@@ -18,23 +18,24 @@ input is not masked, and otherwise will stop with an error.}
 }
 \value{
 If input is provided, then that is returned. If the user cancels
-(cancel button on RStudio or ctrl+c in the terminal), then
+(e.g., cancel button on RStudio or ctrl+c in the terminal), then
 \code{NULL} is returned.
 }
 \description{
-Masked user input (where supported; see details section) for
-entering passwords.
+Masked user input (where supported; see details section for more
+information).  Useful for reading in passwords.
 }
 \details{
-Masking (i.e., not displaying the password
-as input is provided) is supported on most, but not all
+Masking (i.e., not displaying the literal typed text
+as input) is supported on most, but not all
 platforms.  It is supported in RStudio, provided you
-have a suitable version of the GUI and of the package
-'rstudioapi'.  It should also work in the terminal on any
-OS.  Finally, it will work in any environment where the tcltk
-package is available.
+have a suitable version of the GUI.  It should also work in the
+terminal on any major OS.  Finally, it will work in any environment
+where the tcltk package is available.
 
 In the terminal, the maximum length for input is 200 characters.
+Additionally, messages printed to the terminal (including the 
+"*" masking) are printed to stderr.
 }
 \examples{
 \dontrun{

@@ -1,4 +1,10 @@
+Release 0.1-1:
+  * 
+
 Release 0.1-0:
-  * Import functionality from remoter.
-  * Add tcltk method (WCC).
+  * Release to CRAN.
   * Print *'s in the terminal (not my preference, but seems popular).
+  * Add tcltk method (WCC).
+  * Fixes for OS X.
+  * Better handling for C-c and backspace.
+  * Import functionality from remoter.
