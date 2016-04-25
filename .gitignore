@@ -1,6 +1,7 @@
 *~
 *.swp
 
+*.html
 
 src/*.o
 src/*.so
