@@ -12,8 +12,10 @@ Depends:
 Imports:
     utils,
     rstudioapi (>= 0.5)
-Suggests:
-    tcltk
+Suggests: 
+    knitr, 
+    rmarkdown
+VignetteBuilder: knitr
 NeedsCompilation: yes
 ByteCompile: yes
 Authors@R: c(person("Drew", "Schmidt", role=c("aut", "cre"),
