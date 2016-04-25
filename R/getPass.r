@@ -1,8 +1,8 @@
 #' Password Input
 #'
-#' Masked user input (where supported; see details section for more
-#' information).  Useful for reading in passwords.
-#'
+#' Password reader.  Like R's \code{readline()} but the user-typed input
+#' text is not printed to the screen.
+#' 
 #' @details
 #' Masking (i.e., not displaying the literal typed text
 #' as input) is supported on most, but not all
@@ -10,11 +10,11 @@
 #' have a suitable version of the GUI.  It should also work in the
 #' terminal on any major OS.  Finally, it will work in any environment
 #' where the tcltk package is available.
-#'
+#' 
 #' In the terminal, the maximum length for input is 200 characters.
 #' Additionally, messages printed to the terminal (including the 
 #' "*" masking) are printed to stderr.
-#'
+#' 
 #' @param msg
 #' The message to enter into the R session before prompting
 #' for the masked input.  This can be any single string,
@@ -24,15 +24,18 @@
 #' is not supported? If \code{FALSE}, the function will default
 #' to use \code{readline()} with a warning message that the
 #' input is not masked, and otherwise will stop with an error.
-#'
+#' 
 #' @return
 #' If input is provided, then that is returned. If the user cancels
 #' (e.g., cancel button on RStudio or ctrl+c in the terminal), then
 #' \code{NULL} is returned.
-#'
+#' 
 #' @examples
 #' \dontrun{
+#' # Basic usage
 #' getPass::getPass()
+#' 
+#' # Get password with a custom message
 #' getPass::getPass("Enter the password: ")
 #' }
 #'
@@ -100,33 +103,33 @@ readline_masked_term <- function(msg, showstars)
 
 readline_masked_tcltk <- function(msg)
 {
-  ### Define event action.
+  # Define event action
   reset <- function(){
     tcltk::tclvalue(pwdvar) <- ""
   }
-
+  
   submit <- function(){
     tcltk::tclvalue(flagvar) <- 1
     tcltk::tkdestroy(tt)
   }
-
+  
   cleanup <- function(){
     tcltk::tclvalue(flagvar) <- 0
     tcltk::tkdestroy(tt)
   }
-
-  ### Main window.
+  
+  # Main window
   tt <- tcltk::tktoplevel()
   tcltk::tktitle(tt) <- ""
   pwdvar <- tcltk::tclVar("")
   flagvar <- tcltk::tclVar(0)
   
-  ### Main frame.
+  # Main frame
   f1 <- tcltk::tkframe(tt)
   tcltk::tkpack(f1, side = "top")
   tcltk::tkpack(tcltk::tklabel(f1, text = msg), side = "left")
-
-  ### Main entry.
+  
+  # Main entry
   textbox <- tcltk::tkentry(f1, textvariable = pwdvar, show = "*")
   tcltk::tkpack(textbox, side = "left")
   tcltk::tkbind(textbox, "<Return>", submit)
@@ -134,27 +137,26 @@ readline_masked_tcltk <- function(msg)
     tcltk::tkbind(textbox, "<Escape>", cleanup)
   else
     tcltk::tkbind(textbox, "<Control-c>", cleanup)
-
-  ### Buttons for submit and reset.
+  
+  # Buttons for submit and reset
   reset.but <- tcltk::tkbutton(f1, text = "Reset", command = reset)
   submit.but <- tcltk::tkbutton(f1, text = "Submit", command = submit)
   tcltk::tkpack(reset.but, side = "left")
   tcltk::tkpack(submit.but, side = "right")
-
-  ### Add focus.
+  
+  # Add focus
   tcltk::tkwm.minsize(tt, "300", "40")
-  # tcltk::tkwm.maxsize(tt, "200", "40")
   tcltk::tkwm.deiconify(tt)
   tcltk::tkfocus(textbox)
-
-  ### Wait for destroy signal.
+  
+  # Wait for destroy signal
   tcltk::tkwait.window(tt)
   pw <- tcltk::tclvalue(pwdvar)
-
-  ### Check for return.
+  
+  # Check for return
   flag <- tcltk::tclvalue(flagvar)
   if (flag == 0)
     pw <- NULL
-
+  
   return(pw)
 }
