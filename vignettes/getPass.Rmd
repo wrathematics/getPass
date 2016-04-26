@@ -12,7 +12,7 @@ output:
     css: include/custom.css
     highlight: kate
 vignette: >
-  %\VignetteIndexEntry{Guide to the remoter Package}
+  %\VignetteIndexEntry{Guide to the getPass Package}
   %\VignetteEngine{knitr::rmarkdown}
 ---
 
