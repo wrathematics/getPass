@@ -133,7 +133,7 @@ readline_masked_tcltk <- function(msg)
   textbox <- tcltk::tkentry(f1, textvariable = pwdvar, show = "*")
   tcltk::tkpack(textbox, side = "left")
   tcltk::tkbind(textbox, "<Return>", submit)
-  if(.Platform$OS == "windows")
+  if(.Platform$OS.type == "windows")
     tcltk::tkbind(textbox, "<Escape>", cleanup)
   else
     tcltk::tkbind(textbox, "<Control-c>", cleanup)
@@ -147,6 +147,7 @@ readline_masked_tcltk <- function(msg)
   # Add focus
   tcltk::tkwm.minsize(tt, "300", "40")
   tcltk::tkwm.deiconify(tt)
+  message("Please enter password in TK window")
   tcltk::tkfocus(textbox)
   
   # Wait for destroy signal
