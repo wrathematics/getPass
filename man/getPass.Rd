@@ -22,8 +22,8 @@ If input is provided, then that is returned. If the user cancels
 \code{NULL} is returned.
 }
 \description{
-Masked user input (where supported; see details section for more
-information).  Useful for reading in passwords.
+Password reader.  Like R's \code{readline()} but the user-typed input
+text is not printed to the screen.
 }
 \details{
 Masking (i.e., not displaying the literal typed text
@@ -39,7 +39,10 @@ Additionally, messages printed to the terminal (including the
 }
 \examples{
 \dontrun{
+# Basic usage
 getPass::getPass()
+
+# Get password with a custom message
 getPass::getPass("Enter the password: ")
 }
 
