@@ -1,5 +1,6 @@
 Release 0.1-2 (//):
   * Fix vignette title.
+  * Add console notification when using tcltk (Rich FitzJohn)
 
 Release 0.1-1 (4/25/2016):
   * Add package vignette.
