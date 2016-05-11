@@ -94,9 +94,9 @@ readline_masked_rstudio <- function(msg, forcemask)
 
 
 
-readline_masked_term <- function(msg, showstars)
+readline_masked_term <- function(msg, showstars, noblank=FALSE)
 {
-  .Call(getPass_readline_masked, msg, as.integer(showstars))
+  .Call(getPass_readline_masked, msg, as.integer(showstars), as.integer(noblank))
 }
 
 

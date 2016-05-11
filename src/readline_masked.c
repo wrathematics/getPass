@@ -58,10 +58,11 @@ static void ctrlc_handler(int signal)
 #endif
 
 
-SEXP getPass_readline_masked(SEXP msg, SEXP showstars_)
+SEXP getPass_readline_masked(SEXP msg, SEXP showstars_, SEXP noblank_)
 {
   SEXP ret;
   const int showstars = INTEGER(showstars_)[0];
+  const int noblank = INTEGER(noblank_)[0];
   int i=0;
   char c;
   ctrlc = 0;
@@ -95,7 +96,15 @@ SEXP getPass_readline_masked(SEXP msg, SEXP showstars_)
     
     // newline
     if (c == '\n' || c == '\r')
-      break;
+    {
+      if (noblank && i == 0)
+      {
+        i--;
+        continue;
+      }
+      else
+        break;
+    }
     // backspace
     else if (c == '\b' || c == '\177')
     {
