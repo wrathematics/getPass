@@ -25,37 +25,11 @@
 */
 
 
-#include <R.h>
-#include <Rinternals.h>
+#include "getPass.h"
+#include "os.h"
 
 #define MAXLEN 201
 char pw[MAXLEN];
-int ctrlc;
-
-
-#define CHARPT(x,i)	((char*)CHAR(STRING_ELT(x,i)))
-
-
-
-#define OS_WINDOWS (defined(__WIN32) || defined(__WIN32__) || defined(_WIN64) || defined(__WIN64) || defined(__WIN64__) || defined(__TOS_WIN__) || defined(__WINNT) || defined(__WINNT__))
-#define OS_LINUX (defined(__gnu_linux__) || defined(__linux__) || defined(__linux))
-
-#if OS_WINDOWS
-#include <windows.h>
-#include <conio.h>
-#else
-#include <stdio.h>
-#include <stdlib.h>
-#include <termios.h>
-#include <unistd.h>
-#include <signal.h>
-
-static void ctrlc_handler(int signal)
-{
-  ctrlc = 1;
-}
-
-#endif
 
 
 SEXP getPass_readline_masked(SEXP msg, SEXP showstars_, SEXP noblank_)
@@ -65,11 +39,11 @@ SEXP getPass_readline_masked(SEXP msg, SEXP showstars_, SEXP noblank_)
   const int noblank = INTEGER(noblank_)[0];
   int i=0;
   char c;
-  ctrlc = 0;
   
   REprintf(CHARPT(msg, 0));
   
 #if !(OS_WINDOWS)
+  ctrlc = 0;
   struct termios tp, old;
   tcgetattr(STDIN_FILENO, &tp);
   old = tp;

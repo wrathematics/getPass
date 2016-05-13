@@ -24,12 +24,14 @@
     SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#ifndef GETPASS_H__
+#define GETPASS_H__
 
-#include "getPass.h"
 
-SEXP getPass_print_stderr(SEXP msg)
-{
-  REprintf(CHARPT(msg, 0));
-  
-  return R_NilValue;
-}
+#include <R.h>
+#include <Rinternals.h>
+
+#define CHARPT(x,i)	((char*)CHAR(STRING_ELT(x,i)))
+
+
+#endif
