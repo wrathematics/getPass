@@ -7,9 +7,15 @@
 * **Author:** Drew Schmidt and Wei-Chen Chen
 
 
-A micro-package for reading user input in R with masking, i.e., the input is not displayed as it is typed.
+**getPass** is an R package for reading user input with masking, i.e., the input is not displayed as it is typed.  This is obviously ideal for entering passwords.
 
-Currently, RStudio, the command line (any OS), and platforms where the **tcltk** package is available are supported.  We believe this hits just about everything, but for unsupported platforms, non-masked reading (with a warning) is optionally available.  See the package vignette for more information.
+Currently, RStudio, the command line (any OS), and platforms where the **tcltk** package is available are supported.  We believe this hits just about everything, but for unsupported platforms, non-masked reading (with a warning) is optionally available.  See the package vignette for more information.  You can view the vignette by entering:
+
+```r
+vignette("getPass", package="getPass")
+```
+
+into your R session.
 
 
 
@@ -18,6 +24,15 @@ Currently, RStudio, the command line (any OS), and platforms where the **tcltk**
 ```r
 getPass::getPass()
 ```
+
+or
+
+```r
+library(getPass)
+getPass()
+```
+
+The function has several options available.  See `?getPass` for more information.
 
 
 
