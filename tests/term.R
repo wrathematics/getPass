@@ -3,7 +3,8 @@ passpassword <- function(pw, msg="", showstars=FALSE, noblank=FALSE)
   syscmd <- paste0("echo '", pw, "' | Rscript -e 'cat(getPass:::readline_masked_term(msg=", paste0("\"", msg, "\""), ",", showstars, ",", noblank, "))'")
   test <- system(syscmd, intern=TRUE)
   
-  test[-which(test == "WARNING: ignoring environment value of R_HOME")]
+  # test[-which(test == "WARNING: ignoring environment value of R_HOME")]
+  test
 }
 
 pw <- 'asdf'
