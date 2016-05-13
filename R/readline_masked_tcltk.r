@@ -1,20 +1,24 @@
-# Event actions
-tcreset <- function(){
-  tcltk::tclvalue(pwdvar) <- ""
-}
-
-tcsubmit <- function(){
-  tcltk::tclvalue(flagvar) <- 1
-  tcltk::tkdestroy(tt)
-}
-
-tccleanup <- function(){
-  tcltk::tclvalue(flagvar) <- 0
-  tcltk::tkdestroy(tt)
-}
-
 readline_masked_tcltk <- function(msg)
 {
+  cat("Please enter password in TK window\n")
+  flush.console()
+
+  # Define event actions
+  # (This should be in this function because window "tt" is local.)
+  tcreset <- function(){
+    tcltk::tclvalue(pwdvar) <- ""
+  }
+
+  tcsubmit <- function(){
+    tcltk::tclvalue(flagvar) <- 1
+    tcltk::tkdestroy(tt)
+  }
+
+  tccleanup <- function(){
+    tcltk::tclvalue(flagvar) <- 0
+    tcltk::tkdestroy(tt)
+  }
+
   # Main window
   tt <- tcltk::tktoplevel()
   tcltk::tktitle(tt) <- ""
@@ -44,7 +48,6 @@ readline_masked_tcltk <- function(msg)
   # Add focus
   tcltk::tkwm.minsize(tt, "300", "40")
   tcltk::tkwm.deiconify(tt)
-  message("Please enter password in TK window")
   tcltk::tkfocus(textbox)
   
   # Wait for destroy signal
