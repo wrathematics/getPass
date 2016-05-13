@@ -125,7 +125,7 @@ SEXP getPass_readline_masked(SEXP msg, SEXP showstars_, SEXP noblank_)
     error("character limit exceeded");
   }
   
-  if (strncmp(CHARPT(msg, 0), "", 1) != 0)
+  if (showstars || strncmp(CHARPT(msg, 0), "", 1) != 0)
     REprintf("\n");
   
   PROTECT(ret = allocVector(STRSXP, 1));
