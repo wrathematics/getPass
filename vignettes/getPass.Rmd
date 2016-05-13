@@ -20,8 +20,21 @@ vignette: >
 
 # Introduction
 
-**getPass** is an R package for reading user input in R with masking.  The package can be installed with the usual `install.packages()`.  There is one exported function, `getPass()`, which will behave as R's `readline()` but with masked input.  You can pass a message to the password input via the `msg` argmuent, similar to the `prompt` argument in `readline()`.
+**getPass** is an R package for reading user input in R with masking.  The package can be installed with the usual `install.packages()`.  There is one exported function, `getPass()`, which will behave as R's `readline()` but with masked input.  You can pass a message to the password input via the `msg` argument, similar to the `prompt` argument in `readline()`.
 
+The form that password input takes will vary based on how you interface to R (with implementation details below).  If you use **RStudio**, it will look something like this:
+
+![](./pics/rstudio.png)
+
+If you use **RGui** on Windows or **R.app** (if **tcltk** is supported; see section below), it will look like:
+
+![](./pics/tcltk.png)
+
+Finally, if you use the terminal (any OS), it will look like:
+
+![](./pics/cli.png)
+
+We believe this covers pretty much everyone.  One notable exclusion is emacs.  Due to how it handles buffers, I believe it *can't* be supported.  If that is incorrect, please let us know!
 
 
 
@@ -37,11 +50,11 @@ To use this with RStudio, you need:
 In this case, the `getPass()` function wraps the **rstudioapi** function `askForPassword()`.
 
 ## Command Line
-Here, the input reader is custom.  It has been tested successfully on Windows (in the "RTerm" session), Mac (in the terminal, not R.app which will not work!), and Linux.  The maximum length for a password in this case is 200 characters.
+Here, the input reader is custom C code.  It has been tested successfully on Windows (in the "RTerm" session), Mac (in the terminal, not R.app which will not work!), Linux, and FreeBSD.  The maximum length for a password in this case is 200 characters.
 
-On Windows, the reader is just `_getch()`.  On 'nix environments (Mac, Linux, ...), masking is made possible via `tcsetattr()`.  Special handling for each is provided for handling ctrl+c and backspace.
+On Windows, the reader is just `_getch()`.  On 'nix environments (Mac, Linux, ...), masking is made possible via `tcsetattr()`.  Special handling for each is provided for handling `ctrl+c` and backspace.
 
-If you discover an issue, please [file an issue report](https://github.com/wrathematics/getPass/issues).
+If you discover a problem using this, please [file an issue report](https://github.com/wrathematics/getPass/issues).
 
 ## RGui (Windows)
 If you use RGui (the Windows R GUI), then this should use the **tcltk** package.  I don't think it's actually possible for **tcltk** to be unavailable on Windows, so if you are an RGui user and have trouble with this, please [file an issue report](https://github.com/wrathematics/getPass/issues).
