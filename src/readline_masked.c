@@ -28,8 +28,8 @@
 #include "getPass.h"
 #include "os.h"
 
-#define MAXLEN 201
-char pw[MAXLEN];
+#define PWLEN 201
+char pw[PWLEN];
 
 
 SEXP getPass_readline_masked(SEXP msg, SEXP showstars_, SEXP noblank_)
@@ -60,7 +60,7 @@ SEXP getPass_readline_masked(SEXP msg, SEXP showstars_, SEXP noblank_)
   #endif
 #endif
   
-  for (i=0; i<MAXLEN; i++)
+  for (i=0; i<PWLEN; i++)
   {
 #if OS_WINDOWS
     c = _getch();
@@ -119,7 +119,7 @@ SEXP getPass_readline_masked(SEXP msg, SEXP showstars_, SEXP noblank_)
   tcsetattr(0, TCSANOW, &old);
 #endif
   
-  if (i == MAXLEN)
+  if (i == PWLEN)
   {
     REprintf("\n");
     error("character limit exceeded");
