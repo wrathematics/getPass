@@ -38,6 +38,26 @@ We believe this covers pretty much everyone.  One notable exclusion is emacs.  D
 
 
 
+# Options
+
+Currently there are two arguments to `getPass()`.  By setting the `msg` parameter, you can change what is printed in the password dialogue box:
+
+```r
+getPass()
+## PASSWORD: ****
+## [1] "asdf"
+
+getPass(msg="")
+## ****[1] "asdf"
+
+getPass(msg="shh, it's a secret! ")
+## shh, it's a secret! ****
+## [1] "asdf"
+```
+
+Finally, there is the `forcemask` flag, which indicates if reading without masking should be possible.  By default, if one is running under an environment that does not allow reading with masking, then a warning message will be printed, and R's ordinary `readline()` will be used.  However, if this flag is set to `TRUE`, then the function will stop with an error.
+
+
 
 # Implementation Details
 
