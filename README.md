@@ -4,7 +4,6 @@
 * **URL**: https://github.com/wrathematics/getPass
 * **Status:** [![Build Status](https://travis-ci.org/wrathematics/getPass.png)](https://travis-ci.org/wrathematics/getPass)
 * **License:** [![License](http://img.shields.io/badge/license-BSD%202--Clause-orange.svg?style=flat)](http://opensource.org/licenses/BSD-2-Clause)
-* **Download:** [![Download](http://cranlogs.r-pkg.org/badges/getPass)](https://cran.r-project.org/package=getPass)
 * **Author:** Drew Schmidt and Wei-Chen Chen
 
 
