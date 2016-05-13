@@ -43,7 +43,7 @@ SEXP getPass_readline_masked(SEXP msg, SEXP showstars_, SEXP noblank_)
   REprintf(CHARPT(msg, 0));
   
 #if !(OS_WINDOWS)
-  ctrlc = 0;
+  ctrlc = 0; // must be global! defined in os.h
   struct termios tp, old;
   tcgetattr(STDIN_FILENO, &tp);
   old = tp;
@@ -131,6 +131,9 @@ SEXP getPass_readline_masked(SEXP msg, SEXP showstars_, SEXP noblank_)
   PROTECT(ret = allocVector(STRSXP, 1));
   SET_STRING_ELT(ret, 0, mkCharLen(pw, i));
   UNPROTECT(1);
+  
+  for (int i=0; i<PWLEN; i++)
+    pw[i] = '\0';
   
   return ret;
 }
