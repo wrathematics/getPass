@@ -25,37 +25,11 @@
 */
 
 
-#include <R.h>
-#include <Rinternals.h>
+#include "getPass.h"
+#include "os.h"
 
-#define MAXLEN 201
-char pw[MAXLEN];
-int ctrlc;
-
-
-#define CHARPT(x,i)	((char*)CHAR(STRING_ELT(x,i)))
-
-
-
-#define OS_WINDOWS (defined(__WIN32) || defined(__WIN32__) || defined(_WIN64) || defined(__WIN64) || defined(__WIN64__) || defined(__TOS_WIN__) || defined(__WINNT) || defined(__WINNT__))
-#define OS_LINUX (defined(__gnu_linux__) || defined(__linux__) || defined(__linux))
-
-#if OS_WINDOWS
-#include <windows.h>
-#include <conio.h>
-#else
-#include <stdio.h>
-#include <stdlib.h>
-#include <termios.h>
-#include <unistd.h>
-#include <signal.h>
-
-static void ctrlc_handler(int signal)
-{
-  ctrlc = 1;
-}
-
-#endif
+#define PWLEN 201
+char pw[PWLEN];
 
 
 SEXP getPass_readline_masked(SEXP msg, SEXP showstars_, SEXP noblank_)
@@ -65,11 +39,11 @@ SEXP getPass_readline_masked(SEXP msg, SEXP showstars_, SEXP noblank_)
   const int noblank = INTEGER(noblank_)[0];
   int i=0;
   char c;
-  ctrlc = 0;
   
   REprintf(CHARPT(msg, 0));
   
 #if !(OS_WINDOWS)
+  ctrlc = 0; // must be global! defined in os.h
   struct termios tp, old;
   tcgetattr(STDIN_FILENO, &tp);
   old = tp;
@@ -86,7 +60,7 @@ SEXP getPass_readline_masked(SEXP msg, SEXP showstars_, SEXP noblank_)
   #endif
 #endif
   
-  for (i=0; i<MAXLEN; i++)
+  for (i=0; i<PWLEN; i++)
   {
 #if OS_WINDOWS
     c = _getch();
@@ -145,18 +119,21 @@ SEXP getPass_readline_masked(SEXP msg, SEXP showstars_, SEXP noblank_)
   tcsetattr(0, TCSANOW, &old);
 #endif
   
-  if (i == MAXLEN)
+  if (i == PWLEN)
   {
     REprintf("\n");
     error("character limit exceeded");
   }
   
-  if (strncmp(CHARPT(msg, 0), "", 1) != 0)
+  if (showstars || strncmp(CHARPT(msg, 0), "", 1) != 0)
     REprintf("\n");
   
   PROTECT(ret = allocVector(STRSXP, 1));
   SET_STRING_ELT(ret, 0, mkCharLen(pw, i));
   UNPROTECT(1);
+  
+  for (i=0; i<PWLEN; i++)
+    pw[i] = '\0';
   
   return ret;
 }

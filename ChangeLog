@@ -1,7 +1,12 @@
-Release 0.1-2 (//):
+Release 0.2-0 (//):
+  * C lib re-organization.
+  * Zero out buffer when finished.
+
+Release 0.1-2 (5/13/2016):
   * Fix vignette title.
   * Add console notification when using tcltk (Rich FitzJohn)
   * Add tests for terminal reader.
+  * Add screenshots to vignette.
 
 Release 0.1-1 (4/25/2016):
   * Add package vignette.

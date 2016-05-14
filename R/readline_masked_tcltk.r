@@ -1,3 +1,4 @@
+#' @importFrom utils flush.console
 readline_masked_tcltk <- function(msg)
 {
   cat("Please enter password in TK window\n")
