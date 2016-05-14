@@ -18,7 +18,11 @@
 #' @param msg
 #' The message to enter into the R session before prompting
 #' for the masked input.  This can be any single string,
-#' including a "blank", namely \code{""}.
+#' possibly including a "blank" (\code{""}); see the \code{noblank}
+#' argument.
+#' @param noblank
+#' Logical; should blank passwords (\code{""}) be banned?  By default,
+#' they are allowed.
 #' @param forcemask
 #' Logical; should the function stop with an error if masking
 #' is not supported? If \code{FALSE}, the function will default
@@ -40,19 +44,21 @@
 #' }
 #'
 #' @export
-getPass <- function(msg="PASSWORD: ", forcemask=FALSE)
+getPass <- function(msg="PASSWORD: ", noblank=FALSE, forcemask=FALSE)
 {
   if (!is.character(msg) || length(msg) != 1)
     stop("argument 'msg' must be a single string")
+  if (!is.logical(noblank) || length(noblank) != 1 || is.na(noblank))
+    stop("argument 'noblank' must be one of 'TRUE' or 'FALSE'")
   if (!is.logical(forcemask) || length(forcemask) != 1 || is.na(forcemask))
     stop("argument 'forcemask' must be one of 'TRUE' or 'FALSE'")
   
   if (tolower(.Platform$GUI) == "rstudio")
-    pw <- readline_masked_rstudio(msg, forcemask)
+    pw <- readline_masked_rstudio(msg=msg, noblank=noblank, forcemask=forcemask)
   else if (isaterm())
-    pw <- readline_masked_term(msg, showstars=TRUE)
+    pw <- readline_masked_term(msg=msg, showstars=TRUE, noblank=noblank)
   else if (hastcltk())
-    pw <- readline_masked_tcltk(msg)
+    pw <- readline_masked_tcltk(msg=msg, noblank=noblank)
   else if (!forcemask)
     pw <- readline_nomask(msg)
   else
