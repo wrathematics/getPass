@@ -39,11 +39,11 @@ SEXP getPass_readline_masked(SEXP msg, SEXP showstars_, SEXP noblank_)
   const int noblank = INTEGER(noblank_)[0];
   int i=0;
   char c;
+  ctrlc = 0; // must be global! defined in os.h
   
   REprintf(CHARPT(msg, 0));
   
 #if !(OS_WINDOWS)
-  ctrlc = 0; // must be global! defined in os.h
   struct termios tp, old;
   tcgetattr(STDIN_FILENO, &tp);
   old = tp;
