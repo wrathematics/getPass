@@ -5,12 +5,13 @@ readline_masked_tcltk <- function(msg, noblank=FALSE)
   cat(msg.console)
   utils::flush.console()
   
+  # TODO can we do something less dumb in readline_masked_tcltk?
   if (noblank)
   {
-    while(TRUE)
+    while (TRUE)
     {
       pw <- readline_masked_tcltk_window(msg)
-      if(pw != "" && !is.null(pw))
+      if (is.null(pw) || pw != "")
         break
     }
   }
