@@ -40,13 +40,12 @@
 #include <termios.h>
 #include <unistd.h>
 #include <signal.h>
+#endif
 
 int ctrlc;
 static void ctrlc_handler(int signal)
 {
   ctrlc = 1;
 }
-#endif
-
 
 #endif

@@ -1,8 +1,41 @@
 #' @importFrom utils flush.console
-readline_masked_tcltk <- function(msg)
+readline_masked_tcltk <- function(msg = "PASSWORD: ", noblank = FALSE)
 {
-  cat("Please enter password in TK window\n")
-  flush.console()
+  # Print to R console
+  if(noblank)
+  {
+    msg.console <- paste("Please enter '", msg, "' (noblank)",
+                         " in TK window (Alt+Tab)\n", sep = "")
+  }
+  else
+  {
+    msg.console <- paste("Please enter '", msg, "'",
+                         " in TK window (Alt+Tab)\n", sep = "")
+  }
+
+  cat(msg.console)
+  utils::flush.console()
+
+  if(noblank)
+  {
+    while(TRUE)
+    {
+      pw <- readline_masked_tcltk_window(msg, noblank)
+      if(pw != "" && !is.null(pw))
+        break
+    }
+  }
+  else
+    pw <- readline_masked_tcltk_window(msg, noblank)
+
+  pw
+}
+
+readline_masked_tcltk_window <- function(msg = "PASSWD: ", noblank = FALSE)
+{
+  # Print to R console
+  if(noblank)
+    msg <- paste(msg, "(noblank)", sep = "")
 
   # Define event actions
   # (This should be in this function because window "tt" is local.)
