@@ -1,58 +1,43 @@
 #' @importFrom utils flush.console
-readline_masked_tcltk <- function(msg = "PASSWORD: ", noblank = FALSE)
+readline_masked_tcltk <- function(msg, noblank=FALSE)
 {
-  # Print to R console
-  if(noblank)
-  {
-    msg.console <- paste("Please enter '", msg, "' (noblank)",
-                         " in TK window (Alt+Tab)\n", sep = "")
-  }
-  else
-  {
-    msg.console <- paste("Please enter '", msg, "'",
-                         " in TK window (Alt+Tab)\n", sep = "")
-  }
-
+  msg.console <- "Please enter password in TK window (Alt+Tab)\n"
   cat(msg.console)
   utils::flush.console()
-
-  if(noblank)
+  
+  if (noblank)
   {
     while(TRUE)
     {
-      pw <- readline_masked_tcltk_window(msg, noblank)
+      pw <- readline_masked_tcltk_window(msg)
       if(pw != "" && !is.null(pw))
         break
     }
   }
   else
-    pw <- readline_masked_tcltk_window(msg, noblank)
-
+    pw <- readline_masked_tcltk_window(msg)
+  
   pw
 }
 
-readline_masked_tcltk_window <- function(msg = "PASSWD: ", noblank = FALSE)
+readline_masked_tcltk_window <- function(msg)
 {
-  # Print to R console
-  if(noblank)
-    msg <- paste(msg, "(noblank)", sep = "")
-
   # Define event actions
   # (This should be in this function because window "tt" is local.)
   tcreset <- function(){
     tcltk::tclvalue(pwdvar) <- ""
   }
-
+  
   tcsubmit <- function(){
     tcltk::tclvalue(flagvar) <- 1
     tcltk::tkdestroy(tt)
   }
-
+  
   tccleanup <- function(){
     tcltk::tclvalue(flagvar) <- 0
     tcltk::tkdestroy(tt)
   }
-
+  
   # Main window
   tt <- tcltk::tktoplevel()
   tcltk::tktitle(tt) <- ""
