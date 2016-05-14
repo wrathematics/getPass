@@ -132,7 +132,7 @@ SEXP getPass_readline_masked(SEXP msg, SEXP showstars_, SEXP noblank_)
   SET_STRING_ELT(ret, 0, mkCharLen(pw, i));
   UNPROTECT(1);
   
-  for (int i=0; i<PWLEN; i++)
+  for (i=0; i<PWLEN; i++)
     pw[i] = '\0';
   
   return ret;
