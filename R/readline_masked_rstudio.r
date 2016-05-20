@@ -1,4 +1,21 @@
-readline_masked_rstudio <- function(msg, forcemask)
+readline_masked_rstudio <- function(msg, forcemask, noblank=FALSE)
+{
+  if (noblank)
+  {
+    while (TRUE)
+    {
+      pw <- readline_masked_rstudio_window(msg, forcemask)
+      if (is.null(pw) || pw != "")
+        break
+    }
+  }
+  else
+    pw <- readline_masked_rstudio_window(msg, forcemask)
+  
+  pw
+}
+
+readline_masked_rstudio_window <- function(msg, forcemask)
 {
   if (!rstudioapi::hasFun("askForPassword"))
   {

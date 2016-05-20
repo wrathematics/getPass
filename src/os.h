@@ -28,6 +28,8 @@
 #define GETPASS_OS_H__
 
 
+int ctrlc;
+
 #define OS_WINDOWS (defined(__WIN32) || defined(__WIN32__) || defined(_WIN64) || defined(__WIN64) || defined(__WIN64__) || defined(__TOS_WIN__) || defined(__WINNT) || defined(__WINNT__))
 #define OS_LINUX (defined(__gnu_linux__) || defined(__linux__) || defined(__linux))
 
@@ -40,12 +42,11 @@
 #include <termios.h>
 #include <unistd.h>
 #include <signal.h>
-#endif
-
-int ctrlc;
 static void ctrlc_handler(int signal)
 {
   ctrlc = 1;
 }
+#endif
+
 
 #endif

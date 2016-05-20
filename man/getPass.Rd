@@ -4,12 +4,16 @@
 \alias{getPass}
 \title{Password Input}
 \usage{
-getPass(msg = "PASSWORD: ", forcemask = FALSE)
+getPass(msg = "PASSWORD: ", noblank = FALSE, forcemask = FALSE)
 }
 \arguments{
 \item{msg}{The message to enter into the R session before prompting
 for the masked input.  This can be any single string,
-including a "blank", namely \code{""}.}
+possibly including a "blank" (\code{""}); see the \code{noblank}
+argument.}
+
+\item{noblank}{Logical; should blank passwords (\code{""}) be banned?  By default,
+they are allowed.}
 
 \item{forcemask}{Logical; should the function stop with an error if masking
 is not supported? If \code{FALSE}, the function will default

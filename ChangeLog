@@ -1,6 +1,7 @@
 Release 0.2-0 (//):
   * C lib re-organization.
   * Zero out buffer when finished.
+  * Add noblank option.
 
 Release 0.1-2 (5/13/2016):
   * Fix vignette title.
