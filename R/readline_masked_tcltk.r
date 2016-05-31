@@ -22,20 +22,17 @@ readline_masked_tcltk_window <- function(msg, noblank=FALSE)
   
   tcsubmit <- function()
   {
-    tryCatch({
-        if (noblank && tcltk::tclvalue(pwdvar) == "")
-        {
-          stop("No blank input please!")
-        }
-        else
-        {
-          tcltk::tclvalue(flagvar) <- 1
-          tcltk::tkdestroy(tt)
-        }
-      },
-      error = function(e) { tcltk::tkmessageBox(message = geterrmessage()) },
-      finally = { }
-    )
+    if (noblank && tcltk::tclvalue(pwdvar) == "")
+    {
+      tcltk::tkmessageBox(title = "getPass noblank = TRUE",
+                          message = "No blank input please!",
+                          parent = textbox)
+    }
+    else
+    {
+      tcltk::tclvalue(flagvar) <- 1
+      tcltk::tkdestroy(tt)
+    }
   }
   
   tccleanup <- function()
@@ -46,7 +43,7 @@ readline_masked_tcltk_window <- function(msg, noblank=FALSE)
   
   # Main window
   tt <- tcltk::tktoplevel()
-  tcltk::tktitle(tt) <- ""
+  tcltk::tktitle(tt) <- "getPass input"
   pwdvar <- tcltk::tclVar("")
   flagvar <- tcltk::tclVar(0)
   
@@ -87,3 +84,4 @@ readline_masked_tcltk_window <- function(msg, noblank=FALSE)
   
   return(pw)
 }
+
