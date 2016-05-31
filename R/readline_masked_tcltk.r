@@ -4,37 +4,42 @@ readline_masked_tcltk <- function(msg, noblank=FALSE)
   msg.console <- "Please enter password in TK window (Alt+Tab)\n"
   cat(msg.console)
   utils::flush.console()
-  
-  # TODO can we do something less dumb in readline_masked_tcltk?
-  if (noblank)
-  {
-    while (TRUE)
-    {
-      pw <- readline_masked_tcltk_window(msg)
-      if (is.null(pw) || pw != "")
-        break
-    }
-  }
-  else
-    pw <- readline_masked_tcltk_window(msg)
-  
-  pw
+  readline_masked_tcltk_window(msg, noblank)
 }
 
-readline_masked_tcltk_window <- function(msg)
+readline_masked_tcltk_window <- function(msg, noblank=FALSE)
 {
+  # Add noblank to msg
+  if (noblank)
+    msg <- paste0(msg, "\n(no blank)")
+
   # Define event actions
   # (This should be in this function because window "tt" is local.)
-  tcreset <- function(){
+  tcreset <- function()
+  {
     tcltk::tclvalue(pwdvar) <- ""
   }
   
-  tcsubmit <- function(){
-    tcltk::tclvalue(flagvar) <- 1
-    tcltk::tkdestroy(tt)
+  tcsubmit <- function()
+  {
+    tryCatch({
+        if (noblank && tcltk::tclvalue(pwdvar) == "")
+        {
+          stop("No blank input please!")
+        }
+        else
+        {
+          tcltk::tclvalue(flagvar) <- 1
+          tcltk::tkdestroy(tt)
+        }
+      },
+      error = function(e) { tcltk::tkmessageBox(message = geterrmessage()) },
+      finally = { }
+    )
   }
   
-  tccleanup <- function(){
+  tccleanup <- function()
+  {
     tcltk::tclvalue(flagvar) <- 0
     tcltk::tkdestroy(tt)
   }
@@ -54,7 +59,7 @@ readline_masked_tcltk_window <- function(msg)
   textbox <- tcltk::tkentry(f1, textvariable = pwdvar, show = "*")
   tcltk::tkpack(textbox, side = "left")
   tcltk::tkbind(textbox, "<Return>", tcsubmit)
-  if(.Platform$OS.type == "windows")
+  if (.Platform$OS.type == "windows")
     tcltk::tkbind(textbox, "<Escape>", tccleanup)
   else
     tcltk::tkbind(textbox, "<Control-c>", tccleanup)
@@ -62,11 +67,12 @@ readline_masked_tcltk_window <- function(msg)
   # Buttons for submit and reset
   reset.but <- tcltk::tkbutton(f1, text = "Reset", command = tcreset)
   submit.but <- tcltk::tkbutton(f1, text = "Submit", command = tcsubmit)
+
   tcltk::tkpack(reset.but, side = "left")
   tcltk::tkpack(submit.but, side = "right")
   
   # Add focus
-  tcltk::tkwm.minsize(tt, "300", "40")
+  tcltk::tkwm.minsize(tt, "320", "40")
   tcltk::tkwm.deiconify(tt)
   tcltk::tkfocus(textbox)
   
