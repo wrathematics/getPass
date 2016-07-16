@@ -38,6 +38,7 @@ readline_masked_tcltk_window <- function(msg, noblank=FALSE)
   tccleanup <- function()
   {
     tcltk::tclvalue(flagvar) <- 0
+    tcltk::tclvalue(pwdvar) <- ""    ### Zero out tcltk buffer if escape
     tcltk::tkdestroy(tt)
   }
   
@@ -76,12 +77,15 @@ readline_masked_tcltk_window <- function(msg, noblank=FALSE)
   # Wait for destroy signal
   tcltk::tkwait.window(tt)
   pw <- tcltk::tclvalue(pwdvar)
-  
+  tcltk::tclvalue(pwdvar) <- ""    ### Zero out tcltk buffer
+
   # Check for return
   flag <- tcltk::tclvalue(flagvar)
   if (flag == 0)
     pw <- NULL
   
+  ### For return
+  on.exit(gc(verbose = FALSE))
   return(pw)
 }
 
