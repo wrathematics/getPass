@@ -7,6 +7,4 @@ env:
     - _R_CHECK_FORCE_SUGGESTS_=FALSE
 
 before_install:
-before_install:
   - sudo apt-get install tcl-dev
-  - sudo apt-get install tk-dev
