@@ -1,16 +1,16 @@
 #include <Rinternals.h>
 
-#ifdef HAS_TCLTK_
+#ifdef HAS_TCLTK
 #include <tcl.h>
 #endif
 
-SEXP wcc_zerobuffer(SEXP args)
+SEXP wcc_zerobuffer(SEXP tclobj_ptr)
 {
-#ifdef HAS_TCLTK_
+#ifdef HAS_TCLTK
   char *str;
   Tcl_Obj *obj;
 
-  obj = (Tcl_Obj *) R_ExternalPtrAddr(CADR(args));
+  obj = (Tcl_Obj *) R_ExternalPtrAddr(tclobj_ptr);
   str = Tcl_GetStringFromObj(obj, NULL);
 
   while (str[0] != '\0')

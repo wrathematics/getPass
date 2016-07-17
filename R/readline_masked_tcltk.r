@@ -8,10 +8,13 @@ readline_masked_tcltk <- function(msg, noblank=FALSE)
 }
 
 
-wcc_zerobuff <- function(x)
+### Zero tcltk buffer where x is an R tcltk object including an environment
+### that contains an external tcltk pointer pointing to somewhere in memory
+### holding the native tcltk object.
+### tclObj(x) returns the external tcltk pointer.
+wcc_zerobuffer <- function(x)
 {
-  # Zero tcltk buffer where x is an external tcltk pointer
-  .External("wcc_zerobuffer", tcltk::tclObj(x), PACKAGE = "getPass")
+  .Call("wcc_zerobuffer", tcltk::tclObj(x), PACKAGE = "getPass")
 }
 
 
@@ -45,7 +48,7 @@ readline_masked_tcltk_window <- function(msg, noblank=FALSE)
   
   tccleanup <- function()
   {
-    wcc_zerobuff(pwdvar)
+    wcc_zerobuffer(pwdvar)
     tcltk::tclvalue(flagvar) <- 0
     tcltk::tkdestroy(tt)
   }
@@ -85,7 +88,7 @@ readline_masked_tcltk_window <- function(msg, noblank=FALSE)
   # Wait for destroy signal
   tcltk::tkwait.window(tt)
   pw <- tcltk::tclvalue(pwdvar)
-  wcc_zerobuff(pwdvar)
+  wcc_zerobuffer(pwdvar)
 
   # Check for return
   flag <- tcltk::tclvalue(flagvar)
