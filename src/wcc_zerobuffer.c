@@ -12,6 +12,7 @@ SEXP wcc_zerobuffer(SEXP tclobj_ptr)
 
   obj = (Tcl_Obj *) R_ExternalPtrAddr(tclobj_ptr);
   str = Tcl_GetStringFromObj(obj, NULL);
+  // Rprintf("%s\n", str);    // for debug
 
   while (str[0] != '\0')
   {

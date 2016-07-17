@@ -1667,12 +1667,20 @@ TCLTK_LIBS=`${R_HOME}/bin/R CMD config TCLTK_LIBS`
 
 HAS_TCLTK=""
 if test "X${TCLTK_CPPFLAGS}" != "X" -a "X${TCLTK_LIBS}" != "X"; then
-  echo "${TCLTK_CPPFLAGS}"
-  echo "${TCLTK_LIBS}"
   HAS_TCLTK="-DHAS_TCLTK"
 else
     sed -i 's/import(tcltk)//' ./NAMESPACE
 fi
+
+echo " "
+echo "******************* Results of getPass package configure ****************"
+echo " "
+echo ">> TCLTK_CPPFLAGS = ${TCLTK_CPPFLAGS}"
+echo ">> TCLTK_LIBS = ${TCLTK_LIBS}"
+echo ">> HAS_TCLTK = ${HAS_TCLTK}"
+echo " "
+echo "*************************************************************************"
+echo " "
 
 
 ac_config_files="$ac_config_files src/Makevars"
