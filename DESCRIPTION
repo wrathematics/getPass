@@ -12,9 +12,6 @@ Depends:
 Imports:
     utils,
     rstudioapi (>= 0.5)
-Suggests: 
-    knitr, 
-    rmarkdown
 VignetteBuilder: knitr
 NeedsCompilation: yes
 ByteCompile: yes
