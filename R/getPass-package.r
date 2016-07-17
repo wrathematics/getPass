@@ -9,6 +9,8 @@
 #' 
 #' @references Project URL: \url{https://github.com/wrathematics/getPass}
 #' @author Drew Schmidt and Wei-Chen Chen
+#'
+#' @import tcltk
 #' 
 #' @name getPass-package
 #' 
