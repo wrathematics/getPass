@@ -4,7 +4,7 @@
 #include <tcl.h>
 #endif
 
-SEXP wcc_zerobuffer(SEXP tclobj_ptr)
+SEXP wcc_zerobuffer_tcltk(SEXP tclobj_ptr)
 {
 #ifdef HAS_TCLTK
   char *str;
@@ -24,3 +24,22 @@ SEXP wcc_zerobuffer(SEXP tclobj_ptr)
   return(R_NilValue);
 }
 
+
+SEXP wcc_zerobuffer(SEXP obj)
+{
+  int i;
+  char *str;
+
+  for(i = 0; i < length(obj); i++)
+  {
+    str = (char*) CHAR(STRING_ELT(obj, i));
+
+    while (str[0] != '\0')
+    {
+      str[0] = '*';
+      str++;
+    }
+  }
+
+  return(R_NilValue);
+}

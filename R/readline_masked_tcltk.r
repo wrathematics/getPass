@@ -14,7 +14,7 @@ readline_masked_tcltk <- function(msg, noblank=FALSE)
 ### tclObj(x) returns the external tcltk pointer.
 wcc_zerobuffer <- function(x)
 {
-  .Call("wcc_zerobuffer", tcltk::tclObj(x), PACKAGE = "getPass")
+  .Call("wcc_zerobuffer_tcltk", tcltk::tclObj(x), PACKAGE = "getPass")
 }
 
 

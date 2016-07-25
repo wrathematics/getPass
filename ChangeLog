@@ -3,6 +3,7 @@ Release 0.2-0 (//):
   * Zero out buffer when finished.
   * Add noblank option.
   * Make a better tcltk for the noblank option.
+  * Zero out tcltk buffer.
 
 Release 0.1-2 (5/13/2016):
   * Fix vignette title.
