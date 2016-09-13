@@ -3,6 +3,6 @@
 
 *.html
 
-src/*.o
-src/*.so
+*.o
+*.so
 

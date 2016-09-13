@@ -1,8 +1,11 @@
-Release 0.2-0 (//):
+Release 0.3-0 (//):
+  * Add argon2 hash function.
+
+Release 0.2-0 (5/31/2016):
   * C lib re-organization.
   * Zero out buffer when finished.
   * Add noblank option.
-  * Make a better tcltk for the noblank option.
+  * Better tcltk wrapper for the noblank option.
 
 Release 0.1-2 (5/13/2016):
   * Fix vignette title.

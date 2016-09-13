@@ -1,12 +1,14 @@
 Package: getPass
 Type: Package
 Title: Masked User Input
-Version: 0.2-0
+Version: 0.3-0
 Description: A micro-package for reading "passwords", i.e.  reading
     user input with masking, so that the input is not displayed as it 
     is typed.  Currently we have support for 'RStudio', the command line
-    (every OS), and any platform where 'tcltk' is present.
+    (every OS), and any platform where 'tcltk' is present.  The package
+    also has a secure hashing function, namely argon2.
 License: BSD 2-clause License + file LICENSE
+Copyright: See inst/COPYRIGHTS for files in src/argon2.
 Depends:
     R (>= 3.0.0)
 Imports:
