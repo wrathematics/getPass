@@ -1,3 +1,4 @@
+%\VignetteIndexEntry{getPass-guide}
 \documentclass[]{article}
 
 \usepackage{parskip}
