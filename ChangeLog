@@ -1,5 +1,6 @@
-Release 0.3-0 (//):
-  * Add argon2 hash function.
+Release 0.2-1 (//):
+  * Switch to LaTeX vignette.
+  * Add password hashing examples via argon2 to the vignette.
 
 Release 0.2-0 (5/31/2016):
   * C lib re-organization.
