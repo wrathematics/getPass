@@ -13,7 +13,6 @@
 #' @name getPass-package
 #' 
 #' @useDynLib getPass getPass_readline_masked getPass_print_stderr
-#'   R_argon2_hash R_argon2_verify
 #'
 #' @docType package
 #' @keywords package
