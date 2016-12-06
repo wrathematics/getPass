@@ -1,9 +1,15 @@
-%\VignetteIndexEntry{getPass-guide}
+%\VignetteIndexEntry{Guide to the getPass Package}
 \documentclass[]{article}
 
 \usepackage{parskip}
 \setlength{\parskip}{.3cm}
 
+\makeatletter
+\newcommand\code{\bgroup\@makeother\_\@makeother\~\@makeother\$\@codex}
+\def\@codex#1{{\normalfont\ttfamily\hyphenchar\font=-1 #1}\egroup}
+\makeatother
+%%\let\code=\texttt
+\let\proglang=\textsf
 
 \usepackage[margin=.75in]{geometry}
 \usepackage{graphicx}
@@ -66,6 +72,30 @@ masking. The package can be installed with the usual
 with masked input. You can pass a message to the password input via the
 \texttt{msg} argument, similar to the \texttt{prompt} argument in
 \texttt{readline()}.
+
+
+\subsection{Installation}
+
+You can install the stable version from CRAN using the usual
+\texttt{install.packages()}:
+
+\begin{lstlisting}[language=rr]
+install.packages("getPass")
+\end{lstlisting}
+
+The development version is maintained on GitHub. You can install this
+version using any of the well-known installer packages available to R:
+
+\begin{lstlisting}[language=rr]
+### Pick your preference
+devtools::install_github("wrathematics/getPass")
+ghit::install_github("wrathematics/getPass")
+remotes::install_github("wrathematics/getPass")
+\end{lstlisting}
+
+
+
+\subsection{Interfaces}
 
 The form that password input takes will vary based on how you interface
 to R (with implementation details below). If you use \textbf{RStudio},
@@ -182,7 +212,9 @@ communicated to the user, or it can stop with an error.
 
 \section{Password Hashing}\label{password-hashing}
 
-Included with the package is an implementation of the argon2 secure
+In an effort to keep the package installation minimal and small, we do not
+include any methods for hashing passwords.  However, in the suggested package
+\textbf{argon2} contains an implementation of the argon2 secure
 password hashing function. Many experts (of which I am not one) have
 written at length about this topic; and it can quickly get kind of
 complicated and mathy. The basic idea is: don't store passwords as
@@ -192,47 +224,41 @@ functions are hard to invert, so you can know which hash function I used
 and know the output, and still (hopefully) not recover the original
 string.
 
-Using \textbf{getPass}, we can quickly handle this problem without
-having to think very hard. Say you have your password:
+We can quickly handle this problem without having to think very hard. 
+Say you used \textbf{getPass} to read a password into the variable
+\code{pass}:
 
-\begin{lstlisting}
-library(getPass)
-
-pass <- "myPassw0rd!"
+\begin{lstlisting}[language=rr]
+pass
+## [1] "myPassw0rd!"
 \end{lstlisting}
 
 An excellent choice to be sure. This is the ``plaintext''. We can hash
-it with a call to \texttt{pw\_hash()}:
+it with a call to the \textbf{argon2} packages's \code{pw_hash()} function:
 
-\begin{lstlisting}
-hash <- pw_hash(pass)
+\begin{lstlisting}[language=rr]
+hash <- argon2::pw_hash(pass)
 hash
+## [1] "$argon2i$v=19$m=8192,t=20,p=1$NptALqaps/umGkixAfFfF0nNl9WjrkIWlUt8z
+## PkCLBZrkQmjTXRLIzkNe+T6sVChgl3gHxk3WoDF2DnkUtZXww$jpmdN3Ihfbmhbq6x9Be6oUN
+## ppja2a4UN2Qnj7nxVvP4eGBBH7pUdxCICDCy9FFctfath26BFAIksB1oMOp/RaA"
+## attr(,"hashtype")
+## [1] "argon2"
 \end{lstlisting}
 
 Now say you need to validate a password that's been entered against the
-hashed password. All you need to do is call \texttt{pw\_check()}:
+hashed password. All you need to do is call \code{pw_check()}:
 
-\begin{lstlisting}
-pw_check(hash, pass)
-pw_check(hash, "password")
-pw_check(hash, "1234")
+\begin{lstlisting}[language=rr]
+argon2::pw_check(hash, pass)
+## [1] TRUE
+argon2::pw_check(hash, "password")
+## [1] FALSE
+argon2::pw_check(hash, "1234")
+## [1] FALSE
 \end{lstlisting}
 
-Note that the largest a password can be is 32 characters.
 
-\subsection{Gritty Boring Details}\label{gritty-boring-details}
-
-This package distributes the argon2 hash. By default, it will use the
-argon2i version, but the argon2d version is available via an argument to
-\texttt{pw\_hash()}. For additional secure hash functions, see the
-\textbf{sodium}, \textbf{bcrypt}, and \textbf{openssl} packages.
-
-The binding in this package uses a 256 bit salt with data generated from
-Mersenne Twister (MT). MT is not a cryptographically secure PRNG, but
-that's ok. The salt (which can actually be public) just protects against
-rainbow tables. The other algorithm parameters we use include a ``time
-cost'' (number of passes) of 16, ``memory cost'' of 8192 MiB, and 1
-thread.
 
 \section{Acknowledgements}\label{acknowledgements}
 
