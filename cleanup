@@ -8,3 +8,6 @@ rm -rf ./src/*.o
 rm -rf ./src/*.d
 rm -rf ./src/*.dll
 rm -rf ./src-*
+
+rm -rf ./src/argon2/*.o
+rm -rf ./src/argon2/blake2/*.o
