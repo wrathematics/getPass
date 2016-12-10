@@ -31,7 +31,19 @@
 #include <R.h>
 #include <Rinternals.h>
 
-#define CHARPT(x,i)	((char*)CHAR(STRING_ELT(x,i)))
+#define CHARPT(x,i)	(CHAR(STRING_ELT(x,i)))
+
+
+// argon2.c
+SEXP R_argon2_hash(SEXP pass_, SEXP type_);
+SEXP R_argon2_check(SEXP hash_, SEXP pass_);
+
+
+// print_stderr.c
+SEXP getPass_print_stderr(SEXP msg);
+
+// readline_masked.c
+SEXP getPass_readline_masked(SEXP msg, SEXP showstars_, SEXP noblank_);
 
 
 #endif

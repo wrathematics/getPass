@@ -1,8 +1,7 @@
 *~
 *.swp
 
-*.html
+*.o
+*.so
 
-src/*.o
-src/*.so
-
+inst/doc
