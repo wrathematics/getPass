@@ -1,6 +1,7 @@
 Release 0.2-1 (//):
   * Switch to LaTeX vignette.
   * Add password hashing examples via argon2 to the vignette.
+  * Fixed clang compiler warning in os detection.
 
 Release 0.2-0 (5/31/2016):
   * C lib re-organization.
