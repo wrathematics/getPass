@@ -58,7 +58,9 @@
 
 
 \title{Guide to the getPass Package}
-\author{Drew Schmidt}
+\author{Drew Schmidt \\ 
+  \texttt{wrathematics@gmail.com} 
+}
 
 \begin{document}
 \maketitle
