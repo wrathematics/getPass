@@ -26,7 +26,7 @@
 
 
 #include "getPass.h"
-#include "os.h"
+#include "platform.h"
 
 #define PWLEN 201
 char pw[PWLEN];
@@ -39,7 +39,7 @@ SEXP getPass_readline_masked(SEXP msg, SEXP showstars_, SEXP noblank_)
   const int noblank = INTEGER(noblank_)[0];
   int i=0;
   char c;
-  ctrlc = 0; // must be global! defined in os.h
+  ctrlc = 0; // must be global! defined in platform.h
   
   REprintf(CHARPT(msg, 0));
   

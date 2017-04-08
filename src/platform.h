@@ -1,4 +1,4 @@
-/*  Copyright (c) 2016, Schmidt
+/*  Copyright (c) 2016-2017 Schmidt
     All rights reserved.
     
     Redistribution and use in source and binary forms, with or without
@@ -30,8 +30,19 @@
 
 int ctrlc;
 
-#define OS_WINDOWS (defined(__WIN32) || defined(__WIN32__) || defined(_WIN64) || defined(__WIN64) || defined(__WIN64__) || defined(__TOS_WIN__) || defined(__WINNT) || defined(__WINNT__))
-#define OS_LINUX (defined(__gnu_linux__) || defined(__linux__) || defined(__linux))
+#if (defined(__WIN32) || defined(__WIN32__) || defined(_WIN64) || defined(__WIN64) || defined(__WIN64__) || defined(__TOS_WIN__) || defined(__WINNT) || defined(__WINNT__))
+#define OS_WINDOWS 1
+#else
+#define OS_WINDOWS 0
+#endif
+
+#if (defined(__gnu_linux__) || defined(__linux__) || defined(__linux))
+#define OS_LINUX 1
+#else
+#define OS_LINUX 0
+#endif
+
+
 
 #if OS_WINDOWS
 #include <windows.h>
