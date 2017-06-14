@@ -19,23 +19,6 @@ into your R session.
 
 
 
-## Usage
-
-```r
-getPass::getPass()
-```
-
-or
-
-```r
-library(getPass)
-getPass()
-```
-
-The function has several options available.  See `?getPass` for more information.
-
-
-
 ## Installation
 
 You can install the stable version from CRAN using the usual `install.packages()`:
@@ -52,3 +35,20 @@ devtools::install_github("wrathematics/getPass")
 ghit::install_github("wrathematics/getPass")
 remotes::install_github("wrathematics/getPass")
 ```
+
+
+
+## Usage
+
+```r
+getPass::getPass()
+```
+
+or
+
+```r
+library(getPass)
+getPass()
+```
+
+The function has several options available.  See `?getPass` for more information.
