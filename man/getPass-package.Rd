@@ -12,11 +12,10 @@ the user text is not printed as it is typed.  Currently we have support
 for RStudio, the command line (every OS), and any platform where tcltk
 is present.
 }
-\author{
-Drew Schmidt and Wei-Chen Chen
-}
 \references{
 Project URL: \url{https://github.com/wrathematics/getPass}
 }
+\author{
+Drew Schmidt and Wei-Chen Chen
+}
 \keyword{package}
-
