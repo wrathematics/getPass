@@ -17,7 +17,7 @@ citEntry(
   entry = "Manual",
   title = "Guide to the {getPass} Package",
   author = personList(as.person("Drew Schmidt")),
-  year = "2016",
+  year = year,
   note = "{R} Vignette",
   url = "https://cran.r-project.org/package=getPass",
   textVersion = NULL,
