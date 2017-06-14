@@ -1,69 +1,25 @@
 %\VignetteIndexEntry{Guide to the getPass Package}
 \documentclass[]{article}
 
-\usepackage{parskip}
-\setlength{\parskip}{.3cm}
+\usepackage{wrapfig}
+\input{./include/settings}
 
-\makeatletter
-\newcommand\code{\bgroup\@makeother\_\@makeother\~\@makeother\$\@codex}
-\def\@codex#1{{\normalfont\ttfamily\hyphenchar\font=-1 #1}\egroup}
-\makeatother
-%%\let\code=\texttt
-\let\proglang=\textsf
 
-\usepackage[margin=.75in]{geometry}
-\usepackage{graphicx}
-\usepackage{listings}
-\usepackage{hyperref}
-\usepackage{xcolor}
-\usepackage{xspace}
-
-\definecolor{gray}{rgb}{.6,.6,.6}
-\definecolor{dkgray}{rgb}{.3,.3,.3}
-\definecolor{grayish}{rgb}{.9, .9, .9}
-\definecolor{dkgreen}{rgb}{0,0.6,0}
-\definecolor{mauve}{rgb}{0.58,0,0.82}
-
-\hypersetup{
-    pdfnewwindow=true,
-    colorlinks=true,
-    linkcolor=blue,
-    linkbordercolor=blue,
-    citecolor=blue,
-    filecolor=magenta,
-    urlcolor=blue
-}
-
-\lstdefinelanguage{rr}{
-  language=R,
-  basicstyle=\ttfamily\color{black},
-  backgroundcolor=\color{grayish},
-  frame=single,
-  breaklines=true,
-  keywordstyle=\color{blue},
-  commentstyle=\color{dkgreen},
-  stringstyle=\color{mauve},
-  numbers=left,%none,
-  numberstyle=\tiny\color{dkgray},
-  stepnumber=1,
-  numbersep=8pt,
-  showspaces=false,
-  showstringspaces=false,
-  showtabs=false,
-  rulecolor=\color{gray},
-  tabsize=4,
-  captionpos=t,
+\mytitle{Guide to the getPass Package}
+\mysubtitle{}
+\myversion{0.2-1}
+\myauthor{
+\centering
+Drew Schmidt \\ 
+\texttt{wrathematics@gmail.com} 
 }
 
 
-
-\title{Guide to the getPass Package}
-\author{Drew Schmidt \\ 
-  \texttt{wrathematics@gmail.com} 
-}
 
 \begin{document}
-\maketitle
+\makefirstfew
+
+
 
 \section{Introduction}\label{introduction}
 
@@ -241,11 +197,10 @@ it with a call to the \textbf{argon2} packages's \code{pw_hash()} function:
 \begin{lstlisting}[language=rr]
 hash <- argon2::pw_hash(pass)
 hash
-## [1] "$argon2i$v=19$m=8192,t=20,p=1$NptALqaps/umGkixAfFfF0nNl9WjrkIWlUt8z
-## PkCLBZrkQmjTXRLIzkNe+T6sVChgl3gHxk3WoDF2DnkUtZXww$jpmdN3Ihfbmhbq6x9Be6oUN
-## ppja2a4UN2Qnj7nxVvP4eGBBH7pUdxCICDCy9FFctfath26BFAIksB1oMOp/RaA"
-## attr(,"hashtype")
-## [1] "argon2"
+## [1] "$argon2i$v=19$m=8192,t=16,p=2$9pNKyUUs4lrr25QR6aa1mFvqgz/KiUH4y7KttKHcnso8RGv5c8yddJYWCxVWtZpC+1NWGfT1UCnPRPukyXf3gA$IfyzwDfNIUvetRvVCgPAFg9uTzALi7big4loysg5g/a5f4WLfzR895X/M3r0X3D/XkQxY9OqLsRyjmOdUKvRGg"
+attr(,"hashtype")
+[1] "argon2"
+
 \end{lstlisting}
 
 Now say you need to validate a password that's been entered against the
@@ -273,8 +228,11 @@ Architectures and Bringing Statistics to Large Scale Computing} funded
 by the National Science Foundation Division of Mathematical Sciences
 under Grant No. 1418195.
 
-Any opinions, findings, and conclusions or recommendations expressed in
-this material are those of the authors and do not necessarily reflect
-the views of the National Science Foundation.
+
+
+\addcontentsline{toc}{section}{References}
+\bibliography{./include/getPass}
+\bibliographystyle{plain}
+
 
 \end{document}
