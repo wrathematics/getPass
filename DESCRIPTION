@@ -24,4 +24,4 @@ Authors@R: c(person("Drew", "Schmidt", role=c("aut", "cre"), email="wrathematics
 URL: https://github.com/wrathematics/getPass
 BugReports: https://github.com/wrathematics/getPass/issues
 Maintainer: Drew Schmidt <wrathematics@gmail.com>
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
