@@ -49,7 +49,7 @@
 #' @export
 getPass <- function(msg="PASSWORD: ", noblank=FALSE, forcemask=FALSE)
 {
-  if (!is.character(msg) || length(msg) != 1)
+  if (!is.character(msg) || length(msg) != 1 || is.na(msg))
     stop("argument 'msg' must be a single string")
   if (!is.logical(noblank) || length(noblank) != 1 || is.na(noblank))
     stop("argument 'noblank' must be one of 'TRUE' or 'FALSE'")
