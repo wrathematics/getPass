@@ -23,9 +23,8 @@ Drew Schmidt \\
 
 \section{Introduction}\label{introduction}
 
-\textbf{getPass} is an R package for reading user input in R with
-masking. The package can be installed with the usual
-\texttt{install.packages()}. There is one exported function,
+\textbf{getPass}~\cite{getPassPackage} is an R package for reading user input
+in R with masking.  There is one exported function,
 \texttt{getPass()}, which will behave as R's \texttt{readline()} but
 with masked input. You can pass a message to the password input via the
 \texttt{msg} argument, similar to the \texttt{prompt} argument in
@@ -50,6 +49,8 @@ devtools::install_github("wrathematics/getPass")
 ghit::install_github("wrathematics/getPass")
 remotes::install_github("wrathematics/getPass")
 \end{lstlisting}
+
+
 
 
 
@@ -113,6 +114,7 @@ then a warning message will be printed, and R's ordinary
 \texttt{readline()} will be used. However, if this flag is set to
 \texttt{TRUE}, then the function will stop with an error.
 
+
 \subsection{Implementation Details}\label{implementation-details}
 
 \subsubsection{RStudio}\label{rstudio}
@@ -120,14 +122,13 @@ then a warning message will be printed, and R's ordinary
 To use this with RStudio, you need:
 
 \begin{itemize}
-\item
-  RStudio desktop version \textgreater{}= 0.99.879.
-\item
-  The rstudioapi package version \textgreater{}= 0.5.
+  \item RStudio desktop version \textgreater{}= 0.99.879.
+  \item The rstudioapi package version \textgreater{}= 0.5.
 \end{itemize}
 
 In this case, the \texttt{getPass()} function wraps the
 \textbf{rstudioapi} function \texttt{askForPassword()}.
+
 
 \subsubsection{Command Line}\label{command-line}
 
@@ -145,6 +146,7 @@ If you discover a problem using this, please
 \href{https://github.com/wrathematics/getPass/issues}{file an issue
 report}.
 
+
 \subsubsection{RGui (Windows)}\label{rgui-windows}
 
 If you use RGui (the Windows R GUI), then this should use the
@@ -154,12 +156,14 @@ and have trouble with this, please
 \href{https://github.com/wrathematics/getPass/issues}{file an issue
 report}.
 
+
 \subsubsection{R.app (Mac)}\label{r.app-mac}
 
 You will need to install dependencies for the \textbf{tcltk} package.
 I'm not completely sure what this process involves for Macs; if you
 know, please let us know. If \textbf{tcltk} is unavailable, then it will
 use the ``unsupported'' method below.
+
 
 \subsubsection{Other/Unsupported
 Platforms}\label{otherunsupported-platforms}
@@ -168,11 +172,15 @@ When a platform is unsupported, the function will optionally default to
 use R's \texttt{readline()} (without masking!) with a warning
 communicated to the user, or it can stop with an error.
 
+
+
+
+
 \section{Password Hashing}\label{password-hashing}
 
 In an effort to keep the package installation minimal and small, we do not
 include any methods for hashing passwords.  However, in the suggested package
-\textbf{argon2} contains an implementation of the argon2 secure
+\textbf{argon2}~\cite{argon2} contains an implementation of the argon2 secure
 password hashing function. Many experts (of which I am not one) have
 written at length about this topic; and it can quickly get kind of
 complicated and mathy. The basic idea is: don't store passwords as
@@ -214,6 +222,11 @@ argon2::pw_check(hash, "password")
 argon2::pw_check(hash, "1234")
 ## [1] FALSE
 \end{lstlisting}
+
+While we prefer argon2, there are other options available in R, including the
+\textbf{bcrypt}~\cite{bcrypt} and \textbf{sodium}~\cite{sodium} packages.
+
+
 
 
 
