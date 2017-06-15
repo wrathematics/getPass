@@ -61,26 +61,26 @@ to R (with implementation details below). If you use \textbf{RStudio},
 it will look something like this:
 
 \begin{figure}[htbp]
-\centering
-\includegraphics{./pics/rstudio.png}
-\caption{}
+  \centering
+  \includegraphics{./pics/rstudio.png}
+  \caption{RStudio password input.}
 \end{figure}
 
 If you use \textbf{RGui} on Windows or \textbf{R.app} (if \textbf{tcltk}
 is supported; see section below), it will look like:
 
 \begin{figure}[htbp]
-\centering
-\includegraphics{./pics/tcltk.png}
-\caption{}
+  \centering
+  \includegraphics{./pics/tcltk.png}
+  \caption{tcltk password input.}
 \end{figure}
 
 Finally, if you use the terminal (any OS), it will look like:
 
 \begin{figure}[htbp]
-\centering
-\includegraphics{./pics/cli.png}
-\caption{}
+  \centering
+  \includegraphics{./pics/cli.png}
+  \caption{Command line password input.}
 \end{figure}
 
 We believe this covers pretty much everyone. One notable exclusion is
