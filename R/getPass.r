@@ -9,7 +9,9 @@
 #' platforms.  It is supported in RStudio, provided you
 #' have a suitable version of the GUI.  It should also work in the
 #' terminal on any major OS.  Finally, it will work in any environment
-#' where the tcltk package is available.
+#' where the tcltk package is available (e.g., Windows with RGui).
+#' Notably, this will not work with Emacs; passwords can be read, but
+#' there will be no masking.
 #' 
 #' In the terminal, the maximum length for input is 200 characters.
 #' Additionally, messages printed to the terminal (including the 
@@ -28,6 +30,7 @@
 #' is not supported? If \code{FALSE}, the function will default
 #' to use \code{readline()} with a warning message that the
 #' input is not masked, and otherwise will stop with an error.
+#' See the Details section for more information.
 #' 
 #' @return
 #' If input is provided, then that is returned. If the user cancels
@@ -46,7 +49,7 @@
 #' @export
 getPass <- function(msg="PASSWORD: ", noblank=FALSE, forcemask=FALSE)
 {
-  if (!is.character(msg) || length(msg) != 1)
+  if (!is.character(msg) || length(msg) != 1 || is.na(msg))
     stop("argument 'msg' must be a single string")
   if (!is.logical(noblank) || length(noblank) != 1 || is.na(noblank))
     stop("argument 'noblank' must be one of 'TRUE' or 'FALSE'")

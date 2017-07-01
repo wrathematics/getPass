@@ -3,7 +3,7 @@
 * **Version:** 0.2-1
 * **URL**: https://github.com/wrathematics/getPass
 * **Status:** [![Build Status](https://travis-ci.org/wrathematics/getPass.png)](https://travis-ci.org/wrathematics/getPass)
-* **License:** [![License](http://img.shields.io/badge/license-BSD%202--Clause-orange.svg?style=flat)](http://opensource.org/licenses/BSD-2-Clause)
+* **License:** [BSD 2-Clause](http://opensource.org/licenses/BSD-2-Clause)
 * **Author:** Drew Schmidt and Wei-Chen Chen
 
 
@@ -16,23 +16,6 @@ vignette("getPass", package="getPass")
 ```
 
 into your R session.
-
-
-
-## Usage
-
-```r
-getPass::getPass()
-```
-
-or
-
-```r
-library(getPass)
-getPass()
-```
-
-The function has several options available.  See `?getPass` for more information.
 
 
 
@@ -52,3 +35,20 @@ devtools::install_github("wrathematics/getPass")
 ghit::install_github("wrathematics/getPass")
 remotes::install_github("wrathematics/getPass")
 ```
+
+
+
+## Usage
+
+```r
+getPass::getPass()
+```
+
+or
+
+```r
+library(getPass)
+getPass()
+```
+
+The function has several options available.  See `?getPass` for more information.

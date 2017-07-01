@@ -13,6 +13,7 @@ static const R_CallMethodDef CallEntries[] = {
   {"getPass_readline_masked", (DL_FUNC) &getPass_readline_masked, 3},
   {NULL, NULL, 0}
 };
+
 void R_init_getPass(DllInfo *dll)
 {
   R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
