@@ -1,4 +1,4 @@
-/*  Copyright (c) 2016, Schmidt
+/*  Copyright (c) 2016-2017 Drew Schmidt
     All rights reserved.
     
     Redistribution and use in source and binary forms, with or without
@@ -31,6 +31,12 @@
 #define PWLEN 201
 char pw[PWLEN];
 
+#if !(OS_WINDOWS)
+static void ctrlc_handler(int signal)
+{
+  ctrlc = 1;
+}
+#endif
 
 SEXP getPass_readline_masked(SEXP msg, SEXP showstars_, SEXP noblank_)
 {
@@ -49,15 +55,17 @@ SEXP getPass_readline_masked(SEXP msg, SEXP showstars_, SEXP noblank_)
   old = tp;
   tp.c_lflag &= ~(ECHO | ICANON | ISIG);
   tcsetattr(0, TCSAFLUSH, &tp);
+
   #if OS_LINUX
-  signal(SIGINT, ctrlc_handler);
+    signal(SIGINT, ctrlc_handler);
   #else
-  struct sigaction sa;
-  sa.sa_handler = ctrlc_handler;
-  sigemptyset(&sa.sa_mask);
-  sa.sa_flags = 0;
-  sigaction(SIGINT, &sa, NULL);
+    struct sigaction sa;
+    sa.sa_handler = ctrlc_handler;
+    sigemptyset(&sa.sa_mask);
+    sa.sa_flags = 0;
+    sigaction(SIGINT, &sa, NULL);
   #endif
+  
 #endif
   
   for (i=0; i<PWLEN; i++)
