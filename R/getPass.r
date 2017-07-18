@@ -24,7 +24,7 @@
 #' argument.
 #' @param noblank
 #' Logical; should blank passwords (\code{""}) be banned?  By default,
-#' they are allowed.
+#' they are allowed, except with RStudio where they are always banned.
 #' @param forcemask
 #' Logical; should the function stop with an error if masking
 #' is not supported? If \code{FALSE}, the function will default
