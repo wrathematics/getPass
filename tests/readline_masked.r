@@ -10,9 +10,9 @@ if (tolower(.Platform$OS.type) == "windows"){
     ### This seems stupid, but I don't know how else to fix it
     badptrn <- "WARNING: ignoring environment value of R_HOME"
     if (length(test) > 0 && any(grepl(test, pattern=badptrn)))
-    test[-which(test == "WARNING: ignoring environment value of R_HOME")]
+      test[-which(test == "WARNING: ignoring environment value of R_HOME")]
     else
-    test
+      test
   }
   
   pw <- 'asdf'
