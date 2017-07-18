@@ -1,8 +1,10 @@
 Release 0.2-1 (//):
+  * If NULL is returned (on canceled user input), it is now invisible.
   * Switch to LaTeX vignette.
   * Add password hashing examples via argon2 to the vignette.
   * Register native routines.
   * Fixed clang compiler warning in os detection.
+  * Deprecate print_stderr() for message().
 
 Release 0.2-0 (5/31/2016):
   * C lib re-organization.
