@@ -5,7 +5,7 @@ readline_nomask <- function(msg, noblank, silent=FALSE)
   
   message(msg, appendLF=FALSE)
   pw <- readline()
-  while (isTRUE(noblank) && pw == "")
+  while (interactive() && isTRUE(noblank) && pw == "")
   {
     message("No blank input, please!", appendLF=FALSE)
     pw <- readline()
