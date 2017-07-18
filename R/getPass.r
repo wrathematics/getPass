@@ -63,7 +63,7 @@ getPass <- function(msg="PASSWORD: ", noblank=FALSE, forcemask=FALSE)
   else if (hastcltk())
     pw <- readline_masked_tcltk(msg=msg, noblank=noblank)
   else if (!forcemask)
-    pw <- readline_nomask(msg)
+    pw <- readline_nomask(msg, noblank=noblank)
   else
     stop("Masking is not supported on your platform!")
   

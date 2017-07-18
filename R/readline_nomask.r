@@ -1,8 +1,15 @@
-readline_nomask <- function(msg, silent=FALSE)
+readline_nomask <- function(msg, noblank, silent=FALSE)
 {
   if (!silent)
     message("WARNING: your platform is not supported. Input is not masked!")
   
   message(msg, appendLF=FALSE)
-  readline()
+  pw <- readline()
+  while (isTRUE(noblank) && pw == "")
+  {
+    message("No blank input, please!", appendLF=FALSE)
+    pw <- readline()
+  }
+  
+  pw
 }
