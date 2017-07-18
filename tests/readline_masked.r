@@ -1,7 +1,7 @@
 ### We can't run the test on Windows because we have to pipe the output into a new process and I don't think that's possible :[
 if (tolower(.Platform$OS.type) == "windows"){
   invisible(TRUE)
-}else{
+} else {
   passpassword <- function(pw, msg="", showstars=FALSE, noblank=FALSE)
   {
     syscmd <- paste0("echo '", pw, "' | Rscript -e 'cat(getPass:::readline_masked_term(msg=", paste0("\"", msg, "\""), ",", showstars, ",", noblank, "))'")
