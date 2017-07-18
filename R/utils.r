@@ -1,11 +1,3 @@
-print_stderr <- function(msg)
-{
-  ret <- .Call(getPass_print_stderr, msg)
-  invisible(ret)
-}
-
-
-
 isaterm <- function()
 {
   gui <- .Platform$GUI

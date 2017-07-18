@@ -9,7 +9,6 @@ extern SEXP getPass_print_stderr(SEXP msg);
 extern SEXP getPass_readline_masked(SEXP msg, SEXP showstars_, SEXP noblank_);
 
 static const R_CallMethodDef CallEntries[] = {
-  {"getPass_print_stderr", (DL_FUNC) &getPass_print_stderr, 1},
   {"getPass_readline_masked", (DL_FUNC) &getPass_readline_masked, 3},
   {NULL, NULL, 0}
 };
