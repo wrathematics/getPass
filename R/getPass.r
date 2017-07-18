@@ -67,5 +67,9 @@ getPass <- function(msg="PASSWORD: ", noblank=FALSE, forcemask=FALSE)
   else
     stop("Masking is not supported on your platform!")
   
-  pw
+  
+  if (is.null(pw))
+    invisible()
+  else
+    pw
 }
