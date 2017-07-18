@@ -4,8 +4,9 @@ Release 0.2-1 (//):
   * Add password hashing examples via argon2 to the vignette.
   * Register native routines.
   * Fixed clang compiler warning in os detection.
-  * Deprecate print_stderr() for message().
-  * Increase buffer length for terminal inputs.
+  * Replaced print_stderr() for message().
+  * Increased buffer length for masked terminal inputs.
+  * Fixed 'noblank' option for the non-masking reader.
 
 Release 0.2-0 (5/31/2016):
   * C lib re-organization.
