@@ -5,6 +5,7 @@ Release 0.2-1 (//):
   * Register native routines.
   * Fixed clang compiler warning in os detection.
   * Deprecate print_stderr() for message().
+  * Increase buffer length for terminal inputs.
 
 Release 0.2-0 (5/31/2016):
   * C lib re-organization.

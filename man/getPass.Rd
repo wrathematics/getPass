@@ -40,7 +40,7 @@ where the tcltk package is available (e.g., Windows with RGui).
 Notably, this will not work with Emacs; passwords can be read, but
 there will be no masking.
 
-In the terminal, the maximum length for input is 200 characters.
+In the terminal, the maximum length for input is 255 characters.
 Additionally, messages printed to the terminal (including the 
 "*" masking) are printed to stderr.
 }

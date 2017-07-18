@@ -28,8 +28,6 @@
 #define GETPASS_OS_H__
 
 
-int ctrlc;
-
 #if (defined(__WIN32) || defined(__WIN32__) || defined(_WIN64) || defined(__WIN64) || defined(__WIN64__) || defined(__TOS_WIN__) || defined(__WINNT) || defined(__WINNT__))
   #define OS_WINDOWS 1
 #else
