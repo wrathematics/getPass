@@ -1,4 +1,7 @@
-Release 0.2-1 (//):
+Release 0.2-1 (7/19/2017):
+  * Fixed tests/readline_masked.r.
+
+Release 0.2-1 (7/18/2017):
   * If NULL is returned (on canceled user input), it is now invisible.
   * Switch to LaTeX vignette.
   * Add password hashing examples via argon2 to the vignette.

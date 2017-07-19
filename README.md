@@ -1,6 +1,6 @@
 # getPass
 
-* **Version:** 0.2-1
+* **Version:** 0.2-2
 * **URL**: https://github.com/wrathematics/getPass
 * **Status:** [![Build Status](https://travis-ci.org/wrathematics/getPass.png)](https://travis-ci.org/wrathematics/getPass)
 * **License:** [BSD 2-Clause](http://opensource.org/licenses/BSD-2-Clause)

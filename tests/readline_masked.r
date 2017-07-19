@@ -4,15 +4,8 @@ if (tolower(.Platform$OS.type) == "windows"){
 } else {
   passpassword <- function(pw, msg="", showstars=FALSE, noblank=FALSE)
   {
-    syscmd <- paste0("echo '", pw, "' | Rscript -e 'cat(getPass:::readline_masked_term(msg=", paste0("\"", msg, "\""), ",", showstars, ",", noblank, "))'")
-    test <- system(syscmd, intern=TRUE)
-    
-    ### This seems stupid, but I don't know how else to fix it
-    badptrn <- "WARNING: ignoring environment value of R_HOME"
-    if (length(test) > 0 && any(grepl(test, pattern=badptrn)))
-      test[-which(test == "WARNING: ignoring environment value of R_HOME")]
-    else
-      test
+    syscmd <- paste0("echo '", pw, "' | ${R_HOME}/bin${R_ARCH_BIN}/Rscript -e 'cat(getPass:::readline_masked_term(msg=", paste0("\"", msg, "\""), ",", showstars, ",", noblank, "))'")
+    system(syscmd, intern=TRUE)
   }
   
   pw <- 'asdf'
