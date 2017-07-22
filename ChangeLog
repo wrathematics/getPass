@@ -1,8 +1,15 @@
-Release 0.2-1 (//):
+Release 0.2-1 (7/19/2017):
+  * Fixed tests/readline_masked.r.
+
+Release 0.2-1 (7/18/2017):
+  * If NULL is returned (on canceled user input), it is now invisible.
   * Switch to LaTeX vignette.
   * Add password hashing examples via argon2 to the vignette.
   * Register native routines.
   * Fixed clang compiler warning in os detection.
+  * Replaced print_stderr() for message().
+  * Increased buffer length for masked terminal inputs.
+  * Fixed 'noblank' option for the non-masking reader.
 
 Release 0.2-0 (5/31/2016):
   * C lib re-organization.

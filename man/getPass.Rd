@@ -13,7 +13,7 @@ possibly including a "blank" (\code{""}); see the \code{noblank}
 argument.}
 
 \item{noblank}{Logical; should blank passwords (\code{""}) be banned?  By default,
-they are allowed.}
+they are allowed, except with RStudio where they are always banned.}
 
 \item{forcemask}{Logical; should the function stop with an error if masking
 is not supported? If \code{FALSE}, the function will default
@@ -40,7 +40,7 @@ where the tcltk package is available (e.g., Windows with RGui).
 Notably, this will not work with Emacs; passwords can be read, but
 there will be no masking.
 
-In the terminal, the maximum length for input is 200 characters.
+In the terminal, the maximum length for input is 255 characters.
 Additionally, messages printed to the terminal (including the 
 "*" masking) are printed to stderr.
 }

@@ -1,4 +1,4 @@
-/*  Copyright (c) 2016-2017 Schmidt
+/*  Copyright (c) 2016-2017 Drew Schmidt
     All rights reserved.
     
     Redistribution and use in source and binary forms, with or without
@@ -28,35 +28,29 @@
 #define GETPASS_OS_H__
 
 
-int ctrlc;
-
 #if (defined(__WIN32) || defined(__WIN32__) || defined(_WIN64) || defined(__WIN64) || defined(__WIN64__) || defined(__TOS_WIN__) || defined(__WINNT) || defined(__WINNT__))
-#define OS_WINDOWS 1
+  #define OS_WINDOWS 1
 #else
-#define OS_WINDOWS 0
+  #define OS_WINDOWS 0
 #endif
 
 #if (defined(__gnu_linux__) || defined(__linux__) || defined(__linux))
-#define OS_LINUX 1
+  #define OS_LINUX 1
 #else
-#define OS_LINUX 0
+  #define OS_LINUX 0
 #endif
 
 
 
 #if OS_WINDOWS
-#include <windows.h>
-#include <conio.h>
+  #include <windows.h>
+  #include <conio.h>
 #else
-#include <stdio.h>
-#include <stdlib.h>
-#include <termios.h>
-#include <unistd.h>
-#include <signal.h>
-static void ctrlc_handler(int signal)
-{
-  ctrlc = 1;
-}
+  #include <stdio.h>
+  #include <stdlib.h>
+  #include <termios.h>
+  #include <unistd.h>
+  #include <signal.h>
 #endif
 
 

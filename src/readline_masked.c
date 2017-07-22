@@ -1,4 +1,4 @@
-/*  Copyright (c) 2016, Schmidt
+/*  Copyright (c) 2016-2017 Drew Schmidt
     All rights reserved.
     
     Redistribution and use in source and binary forms, with or without
@@ -28,8 +28,22 @@
 #include "getPass.h"
 #include "platform.h"
 
-#define PWLEN 201
+
+#define CTRLC_NO 0
+#define CTRLC_YES 1
+
+#define PWLEN 256
 char pw[PWLEN];
+
+int ctrlc;
+
+#if !(OS_WINDOWS)
+static void ctrlc_handler(int signal)
+{
+  ctrlc = 1;
+}
+#endif
+
 
 
 SEXP getPass_readline_masked(SEXP msg, SEXP showstars_, SEXP noblank_)
@@ -37,9 +51,10 @@ SEXP getPass_readline_masked(SEXP msg, SEXP showstars_, SEXP noblank_)
   SEXP ret;
   const int showstars = INTEGER(showstars_)[0];
   const int noblank = INTEGER(noblank_)[0];
-  int i=0;
+  int i = 0;
+  int j;
   char c;
-  ctrlc = 0; // must be global! defined in platform.h
+  ctrlc = CTRLC_NO; // must be global!
   
   REprintf(CHARPT(msg, 0));
   
@@ -49,15 +64,17 @@ SEXP getPass_readline_masked(SEXP msg, SEXP showstars_, SEXP noblank_)
   old = tp;
   tp.c_lflag &= ~(ECHO | ICANON | ISIG);
   tcsetattr(0, TCSAFLUSH, &tp);
+
   #if OS_LINUX
-  signal(SIGINT, ctrlc_handler);
+    signal(SIGINT, ctrlc_handler);
   #else
-  struct sigaction sa;
-  sa.sa_handler = ctrlc_handler;
-  sigemptyset(&sa.sa_mask);
-  sa.sa_flags = 0;
-  sigaction(SIGINT, &sa, NULL);
+    struct sigaction sa;
+    sa.sa_handler = ctrlc_handler;
+    sigemptyset(&sa.sa_mask);
+    sa.sa_flags = 0;
+    sigaction(SIGINT, &sa, NULL);
   #endif
+  
 #endif
   
   for (i=0; i<PWLEN; i++)
@@ -97,7 +114,7 @@ SEXP getPass_readline_masked(SEXP msg, SEXP showstars_, SEXP noblank_)
       }
     }
     // C-c
-    else if (ctrlc == 1 || c == 3 || c == '\xff')
+    else if (ctrlc == CTRLC_YES || c == 3 || c == '\xff')
     {
 #if !(OS_WINDOWS)
       tcsetattr(0, TCSANOW, &old);
@@ -130,10 +147,10 @@ SEXP getPass_readline_masked(SEXP msg, SEXP showstars_, SEXP noblank_)
   
   PROTECT(ret = allocVector(STRSXP, 1));
   SET_STRING_ELT(ret, 0, mkCharLen(pw, i));
+  
+  for (j=0; j<i; j++)
+    pw[j] = '\0';
+  
   UNPROTECT(1);
-  
-  for (i=0; i<PWLEN; i++)
-    pw[i] = '\0';
-  
   return ret;
 }
