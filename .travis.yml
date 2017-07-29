@@ -3,5 +3,6 @@ warnings_are_errors: true
 
 env:
   global:
+    - MAKEFLAGS="-j 2"
     - CRAN: https://cran.rstudio.com
     - _R_CHECK_FORCE_SUGGESTS_=FALSE
