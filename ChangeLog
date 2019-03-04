@@ -1,5 +1,5 @@
 Release 0.2-3 ():
-  * 
+  * Added fallback reader for windows.
 
 Release 0.2-2 (7/19/2017):
   * Fixed tests/readline_masked.r.

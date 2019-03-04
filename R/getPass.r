@@ -62,6 +62,8 @@ getPass <- function(msg="PASSWORD: ", noblank=FALSE, forcemask=FALSE)
     pw <- readline_masked_term(msg=msg, showstars=TRUE, noblank=noblank)
   else if (hastcltk())
     pw <- readline_masked_tcltk(msg=msg, noblank=noblank)
+  else if (os_windows())
+    pw <- readline_masked_wincred(msg=msg, noblank=noblank)
   else if (!forcemask)
     pw <- readline_nomask(msg, noblank=noblank)
   else
