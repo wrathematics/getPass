@@ -2,7 +2,7 @@
 
 * **Version:** 0.2-3
 * **URL**: https://github.com/wrathematics/getPass
-* **Status:** [![Build Status](https://travis-ci.org/wrathematics/getPass.png)](https://travis-ci.org/wrathematics/getPass)
+* **Status:** [![Linux Build Status via Travis-CI](https://travis-ci.org/wrathematics/getPass.png)](https://travis-ci.org/wrathematics/getPass) [![Windows build status via AppVeyor](https://ci.appveyor.com/api/projects/status/github/wrathematics/getPass?branch=master&svg=true)](https://ci.appveyor.com/project/wrathematics/getPass/branch/master)
 * **License:** [BSD 2-Clause](http://opensource.org/licenses/BSD-2-Clause)
 * **Author:** Drew Schmidt and Wei-Chen Chen
 
