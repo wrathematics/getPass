@@ -68,7 +68,7 @@ readline_masked_tcltk_window <- function(msg, noblank=FALSE)
   textbox <- tcltk::tkentry(f1, textvariable = pwdvar, show = "*")
   tcltk::tkpack(textbox, side = "left")
   tcltk::tkbind(textbox, "<Return>", tcsubmit)
-  if (.Platform$OS.type == "windows")
+  if (os_windows())
     tcltk::tkbind(textbox, "<Escape>", tccleanup)
   else
     tcltk::tkbind(textbox, "<Control-c>", tccleanup)
@@ -99,4 +99,3 @@ readline_masked_tcltk_window <- function(msg, noblank=FALSE)
   on.exit(gc(verbose = FALSE))
   return(pw)
 }
-

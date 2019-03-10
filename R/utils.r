@@ -25,3 +25,10 @@ hastcltk <- function()
   
   test
 }
+
+
+
+os_windows = function()
+{
+  .Platform$OS.type == tolower("windows")
+}

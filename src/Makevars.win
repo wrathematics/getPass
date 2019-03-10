@@ -1,2 +1,12 @@
-PKG_CPPFLAGS = -DHAS_TCLTK ${TCLTK_CPPFLAGS}
-PKG_LIBS = ${TCLTK_LIBS}
+R_OBJECTS = getPass_native.o readline_masked.o
+BIN_FILE = ../inst/bin$(WIN)/getPass.exe
+
+all: $(SHLIB) $(BIN_FILE)
+
+$(SHLIB): $(R_OBJECTS)
+
+BIN_PATH:
+	mkdir -p ../inst/bin$(WIN)
+
+$(BIN_FILE): BIN_PATH
+	$(CXX) $(CXXFLAGS) -o $(BIN_FILE) windows/getPass.cpp -mwindows -lcredui
