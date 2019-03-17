@@ -40,6 +40,7 @@ int ctrlc;
 #if !(OS_WINDOWS)
 static void ctrlc_handler(int signal)
 {
+  (void) signal;
   ctrlc = 1;
 }
 #endif
