@@ -12,7 +12,10 @@ readline_masked_wincred = function(msg, noblank=FALSE)
       stop("could not find getPass.exe")
     
     msg = paste0(noblank, " ", "\"", msg, "\"")
-    system2(file, msg, stdout=TRUE)
+    # system2(file, msg, stdout=TRUE)
+
+    cmd <- paste0(file, " ", msg)
+    shell(cmd, intern = TRUE)
   }
   else
     stop("readline_masked_wincred() can only be called from a windows host")
