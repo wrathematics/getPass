@@ -83,10 +83,15 @@ int main(int argc, char **argv)
     msg = argv[2];
   
   XFontSet font = get_default_font(display);
+  
   write_text(msg, 2, display, win, font);
-  write_text("* Text will not print (not even masked)", 6, display, win, font);
-  write_text("* There is no clipboard support", 7, display, win, font);
-  write_text("* Click the window to cancel", 8, display, win, font);
+  
+  write_text("Press enter to confirm or click anywhere", 5, display, win, font);
+  write_text("in the window interior to cancel", 6, display, win, font);
+  
+  write_text("Note:", 8, display, win, font);
+  write_text("* Text will not print (not even masked)", 9, display, win, font);
+  write_text("* There is no clipboard support", 10, display, win, font);
   
   
   // read keypresses
