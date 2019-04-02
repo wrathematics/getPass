@@ -1,5 +1,5 @@
 CC = gcc
-CPPFLAGS = 
+CPPFLAGS = -Wall -pedantic -Wextra
 LDFLAGS = -lX11
 
 all: clean getPass
