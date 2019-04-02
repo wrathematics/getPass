@@ -34,6 +34,10 @@
 
 #define WINDOW_WIDTH 300
 #define WINDOW_HEIGHT 220
+#define WINDOW_BORDER_WIDTH 2
+
+#define BASE_FONT_NAME_LIST "-*-*-*-R-Normal--*-100-100-100-*-*,fixed"
+#define GRAPHICS_CONTEXT_VALUEMASK (GCForeground | GCLineWidth | GCLineStyle)
 
 #define ERROR_DISPLAY -1
 #define ERROR_TOOBIG -2
@@ -56,23 +60,28 @@ static inline XFontSet get_default_font(Display *display)
   char **missing;
   char *def_string;
   
-  XFontSet font = XCreateFontSet(display, "fixed", &missing, &nmissing, &def_string);
+  XFontSet font = XCreateFontSet(display, BASE_FONT_NAME_LIST, &missing, &nmissing, &def_string);
   XFreeStringList(missing);
   return font;
 }
 
 
 
-#define VALUEMASK (GCForeground | GCLineWidth | GCLineStyle)
-
 static inline void write_text(char *text, int line, Display *display, Window win, XFontSet font)
 {
   XGCValues values = {0};
-  GC pen = XCreateGC(display, win, VALUEMASK, &values);
+  GC pen = XCreateGC(display, win, GRAPHICS_CONTEXT_VALUEMASK, &values);
   int text_x = 10;
   int text_y = 10*line;
   int text_len = strlen(text);
+  
+  XSetForeground(display, pen, 0);
+  
+#if X_HAVE_UTF8_STRING
+  XmbDrawString(display, win, font, pen, text_x, text_y, text, text_len);
+#else
   Xutf8DrawString(display, win, font, pen, text_x, text_y, text, text_len);
+#endif
 }
 
 
