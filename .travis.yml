@@ -5,3 +5,11 @@ env:
   global:
     - CRAN: https://cran.rstudio.com
     - _R_CHECK_FORCE_SUGGESTS_=FALSE
+
+before_install:
+  - sudo apt-get install tcl-dev
+
+before_script:
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+  - sleep 3

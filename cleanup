@@ -7,3 +7,5 @@ rm -rf ./src/*.dll
 rm -rf ./src-*
 
 rm -rf inst/bin/*
+rm -rf inst/bin32
+rm -rf inst/bin64
