@@ -119,7 +119,7 @@ int main(int argc, char **argv)
   write_text("in the window interior to cancel", 6, display, win, font);
   
   write_text("Note:", 8, display, win, font);
-  write_text("* Text will not print (not even masked)", 9, display, win, font);
+  write_text("* No text will print", 9, display, win, font);
   write_text("* There is no clipboard support", 10, display, win, font);
   
   
