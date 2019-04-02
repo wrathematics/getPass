@@ -32,8 +32,6 @@
 
 #define MESSAGE_DEFAULT "PASSWORD:"
 
-#define WINDOW_X 0
-#define WINDOW_Y 0
 #define WINDOW_WIDTH 300
 #define WINDOW_HEIGHT 220
 
@@ -91,11 +89,16 @@ int main(int argc, char **argv)
     return ERROR_DISPLAY;
   }
   
-  int screen = DefaultScreen(display);
-  unsigned long border = WhitePixel(display, screen);
-  unsigned int background = WhitePixel(display, screen);
+  int screen_number = DefaultScreen(display);
+  unsigned long border = WhitePixel(display, screen_number);
+  unsigned int background = WhitePixel(display, screen_number);
   
-  Window win = XCreateSimpleWindow(display, DefaultRootWindow(display), WINDOW_X, WINDOW_Y, WINDOW_WIDTH, WINDOW_HEIGHT, 2, border, background);
+  Display *disp = XOpenDisplay(NULL);
+  Screen *s = DefaultScreenOfDisplay(disp);
+  int w_x = XWidthOfScreen(s) / 2;
+  int w_y = XHeightOfScreen(s) / 2;
+  
+  Window win = XCreateSimpleWindow(display, DefaultRootWindow(display), w_x, w_y, WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_BORDER_WIDTH, border, background);
   
   XSelectInput(display, win, ButtonPressMask|StructureNotifyMask|KeyPressMask|KeyReleaseMask|KeymapStateMask);
   XMapWindow(display, win);
