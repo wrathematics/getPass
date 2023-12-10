@@ -9,4 +9,4 @@ BIN_PATH:
 	mkdir -p ../inst/bin$(WIN)
 
 $(BIN_FILE): BIN_PATH
-	$(CXX) $(CXXFLAGS) -o $(BIN_FILE) windows/getPass.cpp -mwindows -lcredui
+	$(CXX) $(CXXFLAGS) -o $(BIN_FILE) windows/getPass.cpp -lcredui
