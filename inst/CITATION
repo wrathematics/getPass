@@ -1,10 +1,10 @@
 year <- sub("-.*", "", meta$Date)
 note <- sprintf("{R} package version %s", meta$Version)
 
-citEntry(
-  entry = "Misc",
+bibentry(
+  bibtype = "Misc",
   title = "{getPass}: Masked User Input",
-  author = personList(as.person("Drew Schmidt"),
+  author = c(as.person("Drew Schmidt"),
                       as.person("Wei-Chen Chen")),
   year = year,
   note = note,
@@ -13,10 +13,10 @@ citEntry(
   key = "getPassPackage"
 )
 
-citEntry(
-  entry = "Manual",
+bibentry(
+  bibtype = "Manual",
   title = "Guide to the {getPass} Package",
-  author = personList(as.person("Drew Schmidt")),
+  author = c(as.person("Drew Schmidt")),
   year = year,
   note = "{R} Vignette",
   url = "https://cran.r-project.org/package=getPass",
