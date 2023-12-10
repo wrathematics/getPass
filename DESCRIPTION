@@ -1,7 +1,7 @@
 Package: getPass
 Type: Package
 Title: Masked User Input
-Version: 0.2-3
+Version: 0.2-4
 Description: A micro-package for reading "passwords", i.e.  reading
     user input with masking, so that the input is not displayed as it 
     is typed.  Currently we have support for 'RStudio', the command line

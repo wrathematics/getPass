@@ -57,7 +57,7 @@ SEXP getPass_readline_masked(SEXP msg, SEXP showstars_, SEXP noblank_)
   char c;
   ctrlc = CTRLC_NO; // must be global!
   
-  REprintf(CHARPT(msg, 0));
+  REprintf("%s", CHARPT(msg, 0));
   
 #if !(OS_WINDOWS)
   struct termios tp, old;

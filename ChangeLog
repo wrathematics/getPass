@@ -1,4 +1,7 @@
-Release 0.2-3 ():
+Release 0.2-4:
+  * Minor change for CRAN.
+
+Release 0.2-3:
   * Added fallback reader for windows.
 
 Release 0.2-2 (7/19/2017):
